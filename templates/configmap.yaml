@@ -19,9 +19,6 @@ data:
   redis__bandeja__ip__master: "{{ .Values.redis.redisConnectionString }}"
   redis__bandeja__bd: "{{ .Values.redis.bandejaBd }}"
   redis__bandeja__timeout: "{{ .Values.redis.bandejaTimeout }}"
-  redis__SPARQL__ip__master: "{{ .Values.redis.redisConnectionString }}"
-  redis__SPARQL__bd: "{{ .Values.redis.sparqlBd }}"
-  redis__SPARQL__timeout: "{{ .Values.redis.sparqlTimeout }}"
   Servicios__urlBase: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostWeb }}"
   idiomas: "es|Español,en|English"
   connectionType: "2"       # 0 SQL SERVER, 1 Oracle, 2 PostgreSQL
@@ -48,10 +45,9 @@ data:
   schema_servicios: "{{ .Values.ingress.schema_servicios }}"
   https: "{{ .Values.ingress.https }}"
   Authority: "http://identityserver:8080"
-  scopeIdentity: "apiidentity"
-  clientIDIdentity: "Web"
-  clientSecretIdentity: "master"
-
+  scopeIdentity: "{{ .Values.secrets.identity.scope }}"
+  clientIDIdentity: "{{ .Values.secrets.identity.clientID }}"
+  clientSecretIdentity: "{{ .Values.secrets.identity.clientSecret }}"
 
 ---
 # Configuracion para el robots.txt

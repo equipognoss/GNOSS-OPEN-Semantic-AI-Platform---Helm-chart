@@ -52,6 +52,7 @@ Ver [VALUES.md](./docs/VALUES.md) para la lista completa.
 | sql | `acid` | Cadena de conexión para la base de datos ACID | `Server=SERVER_IP;Database=DB_NAME;User Id=DB_USER;Password=DB_USER_PASSWORD;Persist Security Info=true;TrustServerCertificate=True` |
 | virtuoso | `virtuosoRead` | Cadena de conexión para Virtuoso | `HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000` |
 | rabbitmq | `connectionString` | Cadena de conexión para RabbitMQ | `amqp://USER:PASSWORD@SERVER_IP:5672/VIRTUAL_HOST` |
+| identity-secret | `scope` | Ámbito necesario para crear un token para el Identity y poder realizar peticiones a servicios internos | `apiidentity` |
 
 Ver [SECRETS.md](./docs/SECRETS.md) para la lista completa.
 

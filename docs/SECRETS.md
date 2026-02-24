@@ -23,6 +23,13 @@ A continuación se listan todas los posibles secrets que acepta el chart.
 | -- | -- | -- | -- |
 | rabbitmq-secret | rabbitMQConnectionString | amqp://USER:PASSWORD@SERVER_IP:5672/VIRTUAL_HOST | Cadena de conexión que utilizará la aplicación para conectarse a RabbitMQ y envíar o leer mensajes de las colas |
 
+## Identity
+| Nombre secret | Clave secret | Ejemplo | Descripción |
+| -- | -- | -- | -- |
+| identity-secret | scope | apiidentity | Ámbito necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
+| identity-secret | clientID | Web | ClientID necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
+| identity-secret | clientSecret | ClientSecret | ClientSecret necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
+
 ## Ejemplo de implementación
 ### Fichero secrets.yml
 

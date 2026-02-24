@@ -33,6 +33,14 @@ secrets:
     name: rabbitmq-secret
     connectionString:
       secretKey: rabbitMQConnectionString
+  identity:
+    name: identity-secret
+    scope: 
+      secretKey: scope
+    clientID: 
+      secretKey: clientID
+    clientSecret:
+      secretKey: clientSecret
 
 ################################
 #                              #
@@ -207,7 +215,6 @@ api:
   requestMemory: 125Mi
   requestCpu: 100m
   restartPolicy: Always
-  #sizeVolLog: "1Gi" 
   tolerations: null
   affinity: null
 
@@ -279,7 +286,6 @@ interno:
   replicas: 1
   image: "gnoss/gnoss.web.intern.opencore"
   tag: "6.1.5"
-  #tag: {{ tpl .Values.version-front }}
   limitsEnabled: true
   limitMemory: 800Mi
   limitCpu: 500m
@@ -294,7 +300,6 @@ ontologias:
   replicas: 1
   image: "gnoss/gnoss.web.ontologies.opencore"
   tag: "6.1.5"
-  #tag: {{ tpl .Values.version-front }}
   limitsEnabled: true
   limitMemory: 500Mi
   limitCpu: 500m
