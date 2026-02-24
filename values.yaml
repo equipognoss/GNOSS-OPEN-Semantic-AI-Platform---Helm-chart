@@ -1,0 +1,540 @@
+global:
+  ##############################
+  storageClassName: "csi-cephfs-sc"
+  ##############################
+  # DIFERENTES NAMESPACES
+  namespace: "gnoss"
+  ##############################
+  serviceAccount: null
+
+########## SECRETS ###########
+secrets:
+  sql:
+    name: sql-secret
+    acid:  
+      secretKey: acidConnectionString
+    base:
+      secretKey: baseConnectionString
+    oauth:
+      secretKey: oauthConnectionString
+  virtuoso:
+    name: virtuoso-secret
+    read:
+      secretKey: virtuosoRead
+    readHome:
+      secretKey: virtuosoReadHome    
+    writeHome:
+      secretKey: virtuosoWriteHome
+    write1:
+      secretKey: virtuosoWrite1
+    write2:
+      secretKey: virtuosoWrite2
+  rabbitmq:
+    name: rabbitmq-secret
+    connectionString:
+      secretKey: rabbitMQConnectionString
+  identity:
+    name: identity-secret
+    scope: 
+      secretKey: scope
+    clientID: 
+      secretKey: clientID
+    clientSecret:
+      secretKey: clientSecret
+
+################################
+#                              #
+#    VALUES PARA LOS INGRESS   #
+#                              #
+################################
+ingress:
+  enabled: true #Si tiene Ingress (true) para routes false
+  class: "nginx"
+  serviciosEnabled: true
+  hostServicios: "serviciostest.gnoss.com"
+  webEnabled: true
+  hostWeb: "test.gnoss.com"
+  rabbitmqEnabled: true
+  hostRabbitmq: "rabbitmqtest.gnoss.com"
+  sparqlEnabled: true
+  hostSparql: "virtuosotestlectura.gnoss.com"
+  hostSparql1: "virtuosotest1.gnoss.com"
+  hostSparql2: "virtuosotest2.gnoss.com"
+  https: false
+  schema_servicios: "http"
+
+###########################
+#                         #
+#    VALUES COMUNES       #
+#                         #
+###########################
+general:
+  extraTolerations: null
+  # extraTolerations will be appended to service specific tolerations
+  # extraTolerations:
+  #   - key: "team"
+  #     operator: "Equal"
+  #     value: "gnoss"
+  #     effect: "NoSchedule"
+  extraAffinity: null
+  # extraAffinity will be merged with service specific affinity
+  # extraAffinity:
+  #   nodeAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       nodeSelectorTerms:
+  #       - matchExpressions:
+  #         - key: kubernetes.io/hostname
+  #           operator: NotIn
+  #           values:
+  #           - master0
+  #           - master1
+  #           - master2
+  imagePullSecrets: null
+
+###########################
+#                         #
+#    VALUES PARA NGINX    #
+#                         #
+###########################
+nginx:
+  replicas: 1
+  image: "gnoss/nginx-gnoss.opencore"
+  tag: "6.1.5"
+  pullPolicy: Always
+  limitsEnabled: true
+  limitMemory: 500Mi
+  limitCpu: 2
+  requestMemory: 100Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+######################################
+#                                    #
+#     VALUES PARA SERVICIOS WEB      #
+#                                    #
+######################################
+
+# Para crear referencias de values sobre el mismo values
+#template-front: "{{ .Values.version-front }}"
+#version-front: "5.15.7"
+
+web:
+  replicas: 1
+  image: "gnoss/gnoss.web.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 1000Mi
+  limitCpu: 4
+  requestMemory: 300Mi
+  requestCpu: 200m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+login:
+  replicas: 1
+  image: "gnoss/gnoss.web.login.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 600Mi
+  limitCpu: 2
+  requestMemory: 200Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+facetas:
+  replicas: 1
+  image: "gnoss/gnoss.web.facets.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 800Mi
+  limitCpu: 2
+  requestMemory: 200Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+results:
+  replicas: 1
+  image: "gnoss/gnoss.web.results.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 800Mi
+  limitCpu: 2
+  requestMemory: 200Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+autocompletar:
+  replicas: 1
+  image: "gnoss/gnoss.web.autocomplete.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 500Mi
+  limitCpu: 2
+  requestMemory: 100Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+despliegues:
+  replicas: 1
+  image: "gnoss/gnoss.web.deploy.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 500Mi
+  limitCpu: 2
+  requestMemory: 100Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+api:
+  replicas: 1
+  image: "gnoss/gnoss.web.api.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 1Gi
+  limitCpu: 4
+  requestMemory: 125Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+oauth:
+  replicas: 1
+  image: "gnoss/gnoss.web.oauth.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 800Mi
+  limitCpu: 2
+  requestMemory: 125Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+identityserver:
+  replicas: 1
+  image: "gnoss/gnoss.web.identityserver.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 500Mi
+  limitCpu: 500m
+  requestMemory: 100Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+etiquetadoautomatico:
+  replicas: 1
+  image: "gnoss/gnoss.web.labeler.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitMemory: 200Mi
+  limitCpu: 2
+  requestMemory: 100Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  tolerations: null
+  affinity: null
+
+###########################################
+#                                         #
+#    VALUES PARA SERVICIOS STATEFULSET    #
+#                                         #
+###########################################
+generalstatefulset:
+  pullPolicy: IfNotPresent
+
+documents:
+  replicas: 1
+  image: "gnoss/gnoss.web.documents.opencore"
+  tag: "6.1.5"
+  limitsEnabled: true
+  limitMemory: 800Mi
+  limitCpu: 2
+  requestMemory: 125Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  espacioVol: "5Gi"
+  tolerations: null
+  affinity: null
+
+interno:
+  replicas: 1
+  image: "gnoss/gnoss.web.intern.opencore"
+  tag: "6.1.5"
+  limitsEnabled: true
+  limitMemory: 800Mi
+  limitCpu: 500m
+  requestMemory: 125Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  espacioVol: "5Gi"
+  tolerations: null
+  affinity: null
+
+ontologias:
+  replicas: 1
+  image: "gnoss/gnoss.web.ontologies.opencore"
+  tag: "6.1.5"
+  limitsEnabled: true
+  limitMemory: 500Mi
+  limitCpu: 500m
+  requestMemory: 125Mi
+  requestCpu: 100m
+  restartPolicy: Always
+  espacioVol: "5Gi"
+  tolerations: null
+  affinity: null
+  
+visitregistry:
+  replicas: 1
+  image: "gnoss/gnoss.backgroundtask.visitregistry.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 600Mi
+  requestCpu: 50m
+  restartPolicy: Always
+  requestMemory: 125Mi
+  espacioVol: "5Gi"
+  tolerations: null
+  affinity: null
+
+visitcluster:
+  replicas: 1
+  image: "gnoss/gnoss.backgroundtask.visitcluster.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 600Mi
+  requestCpu: 50m
+  restartPolicy: Always
+  requestMemory: 125Mi
+  espacioVol: "5Gi"
+  tolerations: null
+  affinity: null
+
+####################################
+#                                  #
+#    VALUES PARA SERVICIOS BACK    #
+#                                  #
+####################################
+
+
+generalBack:
+  replicas: 1
+  restartPolicy: Always
+  pullPolicy: IfNotPresent
+
+mailservice:
+  replicas: 1
+  image: "gnoss/gnoss.backgroundtask.mail.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 600Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+cacherefresh:
+  replicas: 1
+  image: "gnoss/gnoss.backgroundtask.cacherefresh.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 800Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+
+distributor:
+  replicas: 1
+  image: "gnoss/gnoss.backgroundtask.distributor.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 600Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+
+searchgraphgeneration:
+  replicas: 1
+  image: "gnoss/gnoss.backgroundtask.searchgraphgeneration.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 800Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+thumbnailgenerator:
+  image: "gnoss/gnoss.backgroundtask.thumbnailgenerator.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 600Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+communitywall:
+  image: "gnoss/gnoss.backgroundtask.communitywall.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+socialcacherefresh:
+  image: "gnoss/gnoss.backgroundtask.socialcacherefresh.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+socialsearchgraphgeneration:
+  image: "gnoss/gnoss.backgroundtask.socialsearchgraphgeneration.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+subscriptionsmail:
+  image: "gnoss/gnoss.backgroundtask.subscriptionsmail.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+replication:
+  image: "gnoss/gnoss.backgroundtask.replication.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+newsletters:
+  image: "gnoss/gnoss.backgroundtask.newsletters.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+userwall:
+  image: "gnoss/gnoss.backgroundtask.userwall.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+workflows:
+  image: "gnoss/gnoss.backgroundtask.workflows.opencore"
+  tag: "6.1.5"
+  pullPolicy: IfNotPresent
+  limitsEnabled: true
+  limitCpu: 500m
+  limitMemory: 500Mi
+  requestCpu: 50m
+  requestMemory: 125Mi
+  tolerations: null
+  affinity: null
+
+
+######################################
+#                                    #
+#     VALUES PARA BASES DE DATOS     #
+#                                    #
+######################################
+redis:
+  redisConnectionString: "redis"
+  redisBd: "1"
+  redisTimeout: "60"
+  recursosBd: "2"
+  recursosTimeout: "60"
+  liveusuariosBd: "3"
+  liveusuariosTimeout: "60"
+  bandejaBd: "4"
+  bandejaTimeout: "60"
+  sparqlBd: "5"
+  sparqlTimeout: "60"
+
+##################
+#    Postgres    #
+##################
+postgres:
+  enabled: true

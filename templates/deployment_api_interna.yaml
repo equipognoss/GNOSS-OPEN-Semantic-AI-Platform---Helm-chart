@@ -1,0 +1,116 @@
+#################
+#               #
+#  API-INTERNA  #
+#               #
+#################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-interna
+  name: api-interna
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: {{ .Values.api.replicas }}
+  selector:
+    matchLabels:
+      app: api-interna
+  template:
+    metadata:
+      labels:
+        app: api-interna
+    spec:
+      {{ if or (.Values.api.tolerations) (.Values.general.extraTolerations) }}
+      tolerations:
+      {{- with .Values.api.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.general.extraTolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      {{- $cacheAffinity := default dict .Values.api.affinity }}
+      {{- $extraAffinity := default dict .Values.general.extraAffinity }}
+      {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
+      {{- if $mergedAffinity }}
+      affinity:
+      {{ toYaml $mergedAffinity | nindent 8 }}
+      {{- end }}
+      securityContext:
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: api
+        image: "{{ .Values.api.image}}:{{ .Values.api.tag }}"
+        imagePullPolicy: "{{ .Values.api.pullPolicy }}"
+        {{- if .Values.api.limitsEnabled }}
+        resources:
+          limits:
+            memory: {{ .Values.api.limitMemory }}
+            cpu: {{ .Values.api.limitCpu }}
+          requests:
+            memory: {{ .Values.api.requestMemory }}
+            cpu: {{ .Values.api.requestCpu }}
+        {{- end }}
+        envFrom:
+          - configMapRef:
+              name: config-gnoss-core
+        env:
+        - name: acid
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.acid.secretKey }}
+        - name: base
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.base.secretKey }}
+        - name: oauth
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.oauth.secretKey }}
+        - name: virtuosoConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.read.secretKey }}
+        - name: virtuosoConnectionString_home
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.readHome.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso1
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write1.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso2
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
+        - name: RabbitMQ__colaServiciosWin
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.rabbitmq.name }}
+              key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
+        - name: RabbitMQ__colaReplicacion
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.rabbitmq.name }}
+              key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
+        - name: Servicios__urlApi
+          value: "http://api-interna:8080"
+        ports:
+        - name: "port-api"
+          containerPort: 8080
+          protocol: TCP
+      restartPolicy: {{ .Values.api.restartPolicy }}
+      {{- if .Values.global.serviceAccount }}
+      serviceAccount: "{{ .Values.global.serviceAccount}}"
+      {{- end }}
+      {{- with .Values.general.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml . | nindent 8 }}
+      {{- end }}

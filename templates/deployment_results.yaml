@@ -1,0 +1,96 @@
+#############
+#           #
+#  RESULTS  #
+#           #
+#############
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: results
+  name: results
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: {{ .Values.results.replicas }}
+  selector:
+    matchLabels:
+      app: results
+  template:
+    metadata:
+      labels:
+        app: results
+    spec:
+      {{ if or (.Values.results.tolerations) (.Values.general.extraTolerations) }}
+      tolerations:
+      {{- with .Values.results.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.general.extraTolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      {{- $cacheAffinity := default dict .Values.results.affinity }}
+      {{- $extraAffinity := default dict .Values.general.extraAffinity }}
+      {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
+      {{- if $mergedAffinity }}
+      affinity:
+      {{ toYaml $mergedAffinity | nindent 8 }}
+      {{- end }}
+      securityContext:
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: results
+        image: "{{ .Values.results.image}}:{{ .Values.results.tag }}"
+        imagePullPolicy: "{{ .Values.results.pullPolicy }}"
+        {{- if .Values.results.limitsEnabled }}
+        resources:
+          limits:
+            memory: {{ .Values.results.limitMemory }}
+            cpu: {{ .Values.results.limitCpu }}
+          requests:
+            memory: {{ .Values.results.requestMemory }}
+            cpu: {{ .Values.results.requestCpu }}
+        {{- end }}
+        envFrom:
+          - configMapRef:
+              name: config-gnoss-core
+        env:
+        - name: acid
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.acid.secretKey }}
+        - name: base
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.base.secretKey }}
+        - name: virtuosoConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.read.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso1
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write1.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso2
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
+        - name: Servicios__urlBase
+          value: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}"
+        ports:
+        - name: "port-results"
+          containerPort: 8080
+          protocol: TCP
+      restartPolicy: {{ .Values.results.restartPolicy }}
+      {{- if .Values.global.serviceAccount }}
+      serviceAccount: "{{ .Values.global.serviceAccount}}"
+      {{- end }}
+      {{- with .Values.general.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml . | nindent 8 }}
+      {{- end }}
