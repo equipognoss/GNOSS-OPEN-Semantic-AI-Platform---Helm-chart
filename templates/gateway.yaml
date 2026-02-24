@@ -1,0 +1,34 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gnoss-gateway
+  namespace: {{ .Values.global.namespace }}
+spec:
+  gatewayClassName: nginx
+  listeners:
+  {{- if not .Values.ingress.https }}
+  - name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      namespaces:
+        from: Same
+  {{- else }}
+  - name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      namespaces:
+        from: Same
+  - name: https
+    protocol: HTTPS
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: gnoss-tls-cert
+    allowedRoutes:
+      namespaces:
+        from: Same
+  {{- end }}

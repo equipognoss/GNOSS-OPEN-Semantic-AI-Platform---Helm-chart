@@ -1,0 +1,66 @@
+
+#todos los contenedores de front menos identity (back y front)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-gnoss-core
+  labels:
+    app: config
+data:
+  redis__redis__ip__master: "{{ .Values.redis.redisConnectionString }}"
+  redis__redis__bd: "{{ .Values.redis.redisBd }}"
+  redis__redis__timeout: "{{ .Values.redis.redisTimeout }}"
+  redis__recursos__ip__master: "{{ .Values.redis.redisConnectionString }}"
+  redis__recursos__bd: "{{ .Values.redis.recursosBd }}"
+  redis__recursos__timeout: "{{ .Values.redis.recursosTimeout }}"
+  redis__liveUsuarios__ip__master: "{{ .Values.redis.redisConnectionString }}"
+  redis__liveUsuarios__bd: "{{ .Values.redis.liveusuariosBd }}"
+  redis__liveUsuarios__timeout: "{{ .Values.redis.liveusuariosTimeout }}"
+  redis__bandeja__ip__master: "{{ .Values.redis.redisConnectionString }}"
+  redis__bandeja__bd: "{{ .Values.redis.bandejaBd }}"
+  redis__bandeja__timeout: "{{ .Values.redis.bandejaTimeout }}"
+  redis__SPARQL__ip__master: "{{ .Values.redis.redisConnectionString }}"
+  redis__SPARQL__bd: "{{ .Values.redis.sparqlBd }}"
+  redis__SPARQL__timeout: "{{ .Values.redis.sparqlTimeout }}"
+  Servicios__urlBase: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostWeb }}"
+  idiomas: "es|Español,en|English"
+  connectionType: "2"       # 0 SQL SERVER, 1 Oracle, 2 PostgreSQL
+  puertoVirtuoso: "8890"
+  puertoVirtuosoAux: "1111"
+  PuertoServicioSocketsOffline: "1745"
+  Servicios__urlFacetas: "http://facetas:8080/CargadorFacetas"
+  Servicios__urlResultados: "http://resultados:8080/CargadorResultados"
+  Servicios__urlFacetas__externo: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/facetas/CargadorFacetas"
+  Servicios__urlResultados__externo: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/resultados/CargadorResultados"
+  Servicios__urlInterno: "http://interno:8080"
+  Servicios__urlArchivos: "http://archivo:8080"
+  Servicios__urlDocuments: "http://documents:8080/GestorDocumental"
+  Servicios__urlContent: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/content"
+  Servicios__urlStatic: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostWeb }}"
+  Servicios__urlLogin: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/login"
+  Servicios__autocompletar: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/autocompletar/autocompletar"
+  Servicios__urlApi: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/api" # son variables solo de web y api
+  Servicios__urlOauth: "http://oauth:8080/"
+  Servicios__urlDespliegues: "http://despliegues:8080/"
+  Servicios__urlServicioEtiquetas: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/autocompletaretiquetas"
+  Servicios__etiquetadoAutomatico: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/autocompletaretiquetas/EtiquetadoAutomatico"
+  Servicios__contextosHome: "{{ .Values.ingress.schema_servicios }}://{{ .Values.ingress.hostServicios }}/resultados/CargadorContextoMensajes"
+  schema_servicios: "{{ .Values.ingress.schema_servicios }}"
+  https: "{{ .Values.ingress.https }}"
+  Authority: "http://identityserver:8080"
+  scopeIdentity: "apiidentity"
+  clientIDIdentity: "Web"
+  clientSecretIdentity: "master"
+
+
+---
+# Configuracion para el robots.txt
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: robotstxt-config
+  namespace: {{ .Values.global.namespace }}
+data:
+  robots.txt: |
+    User-agent: *
+    Disallow: /

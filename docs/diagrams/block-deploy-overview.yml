@@ -1,0 +1,60 @@
+block
+  columns 1
+  internet(("Internet"))
+  block:helm
+    columns 1
+    gateway["Gateway"]
+    block:services
+      web["Web"]
+      results["Resultados"]
+      facets["Facetas"]
+      login["Login"]
+      api["API"]
+      otherServices["..."]
+    end
+    block:deployments
+      oauth["OAuth"]
+      identity["Identity"]
+      affinity["Afinidad"]
+      email["Envio email"]
+      otherDeployments["..."]
+    end
+    block:statefulsets
+      intern["Interno"]
+      documents["Documentos"]
+      ontologies["Ontologías"]
+    end
+    pvc["Volumenes persistentes"]
+  end
+  internet --> gateway
+  gateway --> web
+  gateway --> results
+  gateway --> facets
+  gateway --> login
+  gateway --> api
+  gateway --> otherServices
+  intern --> pvc
+  documents --> pvc
+  ontologies --> pvc
+
+style internet fill:#FFF,stroke:#000
+style gateway fill:#FFF,stroke:#000
+style helm fill:#FFF,stroke:#0065F9,stroke-dasharray:4
+style services fill:#FFF,stroke:#15aabf,stroke-dasharray:4
+style web fill:#FFF,stroke:#15aabf
+style results fill:#FFF,stroke:#15aabf
+style facets fill:#FFF,stroke:#15aabf
+style login fill:#FFF,stroke:#15aabf
+style api fill:#FFF,stroke:#15aabf
+style otherServices fill:#FFF,stroke:#15aabf
+style deployments fill:#FFF,stroke:#fab005,stroke-dasharray:4
+style oauth fill:#FFF,stroke:#fab005
+style identity fill:#FFF,stroke:#fab005
+style affinity fill:#FFF,stroke:#fab005
+style email fill:#FFF,stroke:#fab005
+style otherDeployments fill:#FFF,stroke:#fab005
+style statefulsets fill:#FFF,stroke:#6741d9,stroke-dasharray:4
+style intern fill:#FFF,stroke:#6741d9
+style documents fill:#FFF,stroke:#6741d9
+style ontologies fill:#FFF,stroke:#6741d9
+style pvc fill:#FFF,stroke:#000
