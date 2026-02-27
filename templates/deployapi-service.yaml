@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: despliegues
+  labels:
+    servicio: despliegues
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  ports:
+    - name: "port-despliegue"
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: despliegues
+status:
+  loadBalancer: {}

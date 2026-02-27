@@ -36,7 +36,7 @@ A continuación se listan todas los posibles secrets que acepta el chart.
     kind: Secret
     metadata:
 	    name: virtuoso-secret
-	    namespace: {{ .Values.global.namespace }}
+	    namespace: {{ .Release.Namespace | quote }}
 	type: Opaque
 	stringData:
 		virtuosoConnectionString: "HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000"

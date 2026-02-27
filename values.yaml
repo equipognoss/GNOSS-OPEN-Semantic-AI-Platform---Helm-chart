@@ -1,11 +1,6 @@
 global:
   ##############################
   storageClassName: "csi-cephfs-sc"
-  ##############################
-  # DIFERENTES NAMESPACES
-  namespace: "gnoss"
-  ##############################
-  serviceAccount: null
 
 ########## SECRETS ###########
 secrets:
@@ -126,7 +121,7 @@ web:
   tag: "6.1.5"
   pullPolicy: IfNotPresent
   limitsEnabled: true
-  limitMemory: 1000Mi
+  limitMemory: 6000Mi
   limitCpu: 4
   requestMemory: 300Mi
   requestCpu: 200m
@@ -521,7 +516,8 @@ workflows:
 #                                    #
 ######################################
 redis:
-  redisConnectionString: "redis"
+  read: "redis"
+  master: "redis"
   redisBd: "1"
   redisTimeout: "60"
   recursosBd: "2"

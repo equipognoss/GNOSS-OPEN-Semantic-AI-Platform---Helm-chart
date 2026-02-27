@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: resultados
+  labels:
+    servicio: resultados
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  ports:
+    - name: "port-results"
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: results
+status:
+  loadBalancer: {}

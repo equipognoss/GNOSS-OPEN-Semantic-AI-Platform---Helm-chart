@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: autocompletar
+  labels:
+    servicio: autocompletar
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  ports:
+    - name: "port-autocomple"
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: autocompletar
+status:
+  loadBalancer: {}

@@ -1,0 +1,99 @@
+###########
+#         #
+#  OAUTH  #
+#         #
+###########
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oauth
+  name: oauth
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  replicas: {{ .Values.oauth.replicas }}
+  selector:
+    matchLabels:
+      app: oauth
+  template:
+    metadata:
+      labels:
+        app: oauth
+    spec:
+      {{ if or (.Values.oauth.tolerations) (.Values.general.extraTolerations) }}
+      tolerations:
+      {{- with .Values.oauth.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.general.extraTolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      {{- $cacheAffinity := default dict .Values.oauth.affinity }}
+      {{- $extraAffinity := default dict .Values.general.extraAffinity }}
+      {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
+      {{- if $mergedAffinity }}
+      affinity:
+      {{ toYaml $mergedAffinity | nindent 8 }}
+      {{- end }}
+      securityContext:
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: oauth
+        image: {{ printf "%s:%s" .Values.oauth.image .Values.oauth.tag }}
+        imagePullPolicy: {{ .Values.oauth.pullPolicy }}
+        {{- if .Values.oauth.limitsEnabled | quote }}
+        resources:
+          limits:
+            memory: {{ .Values.oauth.limitMemory }}
+            cpu: {{ .Values.oauth.limitCpu }}
+          requests:
+            memory: {{ .Values.oauth.requestMemory }}
+            cpu: {{ .Values.oauth.requestCpu }}
+        {{- end }}
+        envFrom:
+          - configMapRef:
+              name: config-gnoss-core
+        env:
+        - name: acid
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.acid.secretKey }}
+        - name: base
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.base.secretKey }}
+        - name: oauth
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.oauth.secretKey }}
+        - name: virtuosoConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.read.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso1
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write1.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso2
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
+        ports:
+        - name: "port-oauth"
+          containerPort: 8080
+          protocol: TCP
+      restartPolicy: {{ .Values.oauth.restartPolicy }}
+      {{- if .Values.global.serviceAccountName }}
+      serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
+      {{- end }}
+      {{- with .Values.general.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml . | nindent 8 }}
+      {{- end }}
