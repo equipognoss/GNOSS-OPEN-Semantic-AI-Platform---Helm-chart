@@ -49,12 +49,6 @@ ingress:
   hostServicios: "serviciostest.gnoss.com"
   webEnabled: true
   hostWeb: "test.gnoss.com"
-  rabbitmqEnabled: true
-  hostRabbitmq: "rabbitmqtest.gnoss.com"
-  sparqlEnabled: true
-  hostSparql: "virtuosotestlectura.gnoss.com"
-  hostSparql1: "virtuosotest1.gnoss.com"
-  hostSparql2: "virtuosotest2.gnoss.com"
   https: false
   schema_servicios: "http"
 
