@@ -3,7 +3,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: gnoss-routes
+  name: gnoss-web-routes
   namespace: {{ .Release.Namespace | quote }}
 spec:
   parentRefs:
@@ -18,7 +18,7 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-    - name: nginx
+    - name: web
       port: 8080
 
 
@@ -26,7 +26,7 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: gnoss-routes
+  name: gnoss-services-routes
   namespace: {{ .Release.Namespace | quote }}
 spec:
   parentRefs:
