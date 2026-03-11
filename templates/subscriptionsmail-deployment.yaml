@@ -1,0 +1,99 @@
+######################
+# SUBSCRIPTIONS_MAIL #
+######################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: subscriptionsmail
+  name: subscriptionsmail
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  replicas: {{ .Values.generalBack.replicas }}
+  selector:
+    matchLabels:
+      app: subscriptionsmail
+  template:
+    metadata:
+      labels:
+        app: subscriptionsmail
+    spec:
+      {{ if or (.Values.subscriptionsmail.tolerations) (.Values.general.extraTolerations) }}
+      tolerations:
+      {{- with .Values.subscriptionsmail.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.general.extraTolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      {{- $cacheAffinity := default dict .Values.subscriptionsmail.affinity }}
+      {{- $extraAffinity := default dict .Values.general.extraAffinity }}
+      {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
+      {{- if $mergedAffinity }}
+      affinity:
+      {{ toYaml $mergedAffinity | nindent 8 }}
+      {{- end }}
+      securityContext:
+        fsGroupChangePolicy: OnRootMismatch
+      {{- if .Values.global.serviceAccountName }}
+      serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
+      {{- end }}
+      {{- with .Values.general.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: subscriptionsmail
+        image: {{ printf "%s:%s" .Values.subscriptionsmail.image .Values.subscriptionsmail.tag }}
+        imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
+        {{- if .Values.subscriptionsmail.limitsEnabled | quote }}
+        resources:
+          limits:
+            memory: {{ .Values.subscriptionsmail.limitMemory }}
+            cpu: {{ .Values.subscriptionsmail.limitCpu }}
+          requests:
+            memory: {{ .Values.subscriptionsmail.requestMemory }}
+            cpu: {{ .Values.subscriptionsmail.requestCpu }}
+        {{- end }}
+        envFrom:
+          - configMapRef:
+              name: config-gnoss-core
+        env:
+        - name: acid
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.acid.secretKey }}
+        - name: base
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.base.secretKey }}
+        - name: virtuosoConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.read.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso1
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write1.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso2
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
+        - name: RabbitMQ__colaServiciosWin
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.rabbitmq.name }}
+              key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
+        - name: RabbitMQ__colaReplicacion
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.rabbitmq.name }}
+              key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
+        - name: intervalo
+          value: "100"

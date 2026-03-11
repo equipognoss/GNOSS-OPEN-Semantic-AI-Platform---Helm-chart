@@ -1,11 +1,9 @@
 global:
   ##############################
   storageClassName: "csi-cephfs-sc"
-  ##############################
-  # DIFERENTES NAMESPACES
-  namespace: "gnoss"
-  ##############################
-  serviceAccount: null
+  hosts:
+    services: ""
+    web: ""
 
 ########## SECRETS ###########
 secrets:
@@ -41,6 +39,8 @@ secrets:
       secretKey: clientID
     clientSecret:
       secretKey: clientSecret
+  tls:
+    secretName: tls-secret
 
 ################################
 #                              #
@@ -48,20 +48,9 @@ secrets:
 #                              #
 ################################
 ingress:
-  enabled: true #Si tiene Ingress (true) para routes false
-  class: "nginx"
-  serviciosEnabled: true
-  hostServicios: "serviciostest.gnoss.com"
-  webEnabled: true
-  hostWeb: "test.gnoss.com"
-  rabbitmqEnabled: true
-  hostRabbitmq: "rabbitmqtest.gnoss.com"
-  sparqlEnabled: true
-  hostSparql: "virtuosotestlectura.gnoss.com"
-  hostSparql1: "virtuosotest1.gnoss.com"
-  hostSparql2: "virtuosotest2.gnoss.com"
-  https: false
-  schema_servicios: "http"
+  https: true
+  schema_servicios: "https"
+  forwardedheaders: true
 
 ###########################
 #                         #
@@ -91,25 +80,6 @@ general:
   #           - master2
   imagePullSecrets: null
 
-###########################
-#                         #
-#    VALUES PARA NGINX    #
-#                         #
-###########################
-nginx:
-  replicas: 1
-  image: "gnoss/nginx-gnoss.opencore"
-  tag: "6.1.5"
-  pullPolicy: Always
-  limitsEnabled: true
-  limitMemory: 500Mi
-  limitCpu: 2
-  requestMemory: 100Mi
-  requestCpu: 100m
-  restartPolicy: Always
-  tolerations: null
-  affinity: null
-
 ######################################
 #                                    #
 #     VALUES PARA SERVICIOS WEB      #
@@ -126,13 +96,17 @@ web:
   tag: "6.1.5"
   pullPolicy: IfNotPresent
   limitsEnabled: true
-  limitMemory: 1000Mi
+  limitMemory: 6000Mi
   limitCpu: 4
   requestMemory: 300Mi
   requestCpu: 200m
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logs:
+    enabled: true
+    size: "1Gi"
+    path: "/app/logs"
 
 login:
   replicas: 1
@@ -503,6 +477,7 @@ userwall:
   affinity: null
 
 workflows:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.workflows.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -521,7 +496,8 @@ workflows:
 #                                    #
 ######################################
 redis:
-  redisConnectionString: "redis"
+  read: "redis"
+  master: "redis"
   redisBd: "1"
   redisTimeout: "60"
   recursosBd: "2"

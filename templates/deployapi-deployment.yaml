@@ -1,0 +1,96 @@
+#################
+#               #
+#  DESPLIEGUES  #
+#               #
+#################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: despliegues
+  name: despliegues
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  replicas: {{ .Values.despliegues.replicas }}
+  selector:
+    matchLabels:
+      app: despliegues
+  template:
+    metadata:
+      labels:
+        app: despliegues
+    spec:
+      {{ if or (.Values.despliegues.tolerations) (.Values.general.extraTolerations) }}
+      tolerations:
+      {{- with .Values.despliegues.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.general.extraTolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      {{- $cacheAffinity := default dict .Values.despliegues.affinity }}
+      {{- $extraAffinity := default dict .Values.general.extraAffinity }}
+      {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
+      {{- if $mergedAffinity }}
+      affinity:
+      {{ toYaml $mergedAffinity | nindent 8 }}
+      {{- end }}
+      securityContext:
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: despliegues
+        image: {{ printf "%s:%s" .Values.despliegues.image .Values.despliegues.tag }}
+        imagePullPolicy: {{ .Values.despliegues.pullPolicy }}
+        {{- if .Values.despliegues.limitsEnabled | quote }}
+        resources:
+          limits:
+            memory: {{ .Values.despliegues.limitMemory }}
+            cpu: {{ .Values.despliegues.limitCpu }}
+          requests:
+            memory: {{ .Values.despliegues.requestMemory }}
+            cpu: {{ .Values.despliegues.requestCpu }}
+        {{- end }}
+        envFrom:
+          - configMapRef:
+              name: config-gnoss-core
+        env:
+        - name: acid
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.acid.secretKey }}
+        - name: base
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.base.secretKey }}
+        - name: virtuosoConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.read.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso1
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write1.secretKey }}
+        - name: Virtuoso__Escritura__Virtuoso2
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
+        - name: dominio
+          value: {{ .Values.global.hosts.web }}
+        ports:
+        - name: "port-despliegue"
+          containerPort: 8080
+          protocol: TCP
+      restartPolicy: {{ .Values.despliegues.restartPolicy }}
+      {{- if .Values.global.serviceAccountName }}
+      serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
+      {{- end }}
+      {{- with .Values.general.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml . | nindent 8 }}
+      {{- end }}

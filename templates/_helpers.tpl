@@ -56,3 +56,10 @@ Create the name of the service account to use
 {{- define "gnoss.serviceAccountName" -}}
 {{- default (include "gnoss.fullname" .) }}
 {{- end }}
+
+{{/*
+Create the name of the Persistent Volume
+*/}}
+{{- define "gnoss.persistentVolumeName" -}}
+{{ printf "vol-gnoss-%s" .Release.Namespace }}
+{{- end }}

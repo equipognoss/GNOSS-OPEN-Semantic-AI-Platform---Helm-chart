@@ -1,0 +1,88 @@
+####################
+#                  #
+#  IDENTITYSERVER  #
+#                  #
+####################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: identityserver
+  name: identityserver
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  replicas: {{ .Values.identityserver.replicas }}
+  selector:
+    matchLabels:
+      app: identityserver
+  template:
+    metadata:
+      labels:
+        app: identityserver
+    spec:
+      {{ if or (.Values.identityserver.tolerations) (.Values.general.extraTolerations) }}
+      tolerations:
+      {{- with .Values.identityserver.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.general.extraTolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      {{- $cacheAffinity := default dict .Values.identityserver.affinity }}
+      {{- $extraAffinity := default dict .Values.general.extraAffinity }}
+      {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
+      {{- if $mergedAffinity }}
+      affinity:
+      {{ toYaml $mergedAffinity | nindent 8 }}
+      {{- end }}
+      securityContext:
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+      - name: identityserver
+        image: {{ printf "%s:%s" .Values.identityserver.image .Values.identityserver.tag }}
+        imagePullPolicy: {{ .Values.identityserver.pullPolicy }}
+        {{- if .Values.identityserver.limitsEnabled | quote }}
+        resources:
+          limits:
+            memory: {{ .Values.identityserver.limitMemory }}
+            cpu: {{ .Values.identityserver.limitCpu }}
+          requests:
+            memory: {{ .Values.identityserver.requestMemory }}
+            cpu: {{ .Values.identityserver.requestCpu }}
+        {{- end }}
+        envFrom:
+          - configMapRef:
+              name: config-gnoss-core
+        env:
+        - name: acid
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.acid.secretKey }}
+        - name: base
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.base.secretKey }}
+        - name: virtuosoConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.read.secretKey }}
+        - name: IssuerUri
+          value: "http://identityserver:8080/"
+        - name: segundostoken
+          value: "500"
+        ports:
+        - name: "port-identity"
+          containerPort: 8080
+          protocol: TCP
+      restartPolicy: {{ .Values.identityserver.restartPolicy }}
+      {{- if .Values.global.serviceAccountName }}
+      serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
+      {{- end }}
+      {{- with .Values.general.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml . | nindent 8 }}
+      {{- end }}

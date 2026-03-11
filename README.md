@@ -38,10 +38,11 @@ Los componentes que forman parte del chart son:
 
 | Valor | Descripción | Valor por defecto |
 |-----------|-------------|-------------------|
-| `init.namespace` | Namespace donde se despliega | `produccion` |
-| `ingress.https` | Habilitar HTTPS | `true` |
-| `ingress.hostWeb` | Hostname para web | `gnoss.com` |
-| `ingress.hostServicios` | Hostname para servicios | `servicios.gnoss.com` |
+| `Release.namespace` | Namespace donde se despliega | Valor fijado por el sistema de despliegue |
+| `ingress.https` | Habilitar HTTPS |  |
+| `ingress.forwardedheaders` | Valor que se le da a la variable ASPNETCORE_FORWARDEDHEADERS_ENABLED para que llegue el schema a la app |  |
+| `global..hosts.web` | Hostname para web |  |
+| `global.hosts.services` | Hostname para servicios |  |
 
 Ver [VALUES.md](./docs/VALUES.md) para la lista completa.
 
@@ -49,9 +50,9 @@ Ver [VALUES.md](./docs/VALUES.md) para la lista completa.
 
 | Nombre | Clave | Descripción | Ejemplo |
 |-----------|-------------|-------------------|-------------------|
-| sql | `acid` | Cadena de conexión para la base de datos ACID | `Server=SERVER_IP;Database=DB_NAME;User Id=DB_USER;Password=DB_USER_PASSWORD;Persist Security Info=true;TrustServerCertificate=True` |
-| virtuoso | `virtuosoRead` | Cadena de conexión para Virtuoso | `HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000` |
-| rabbitmq | `connectionString` | Cadena de conexión para RabbitMQ | `amqp://USER:PASSWORD@SERVER_IP:5672/VIRTUAL_HOST` |
+| sql-secret | `acid` | Cadena de conexión para la base de datos ACID | `Server=SERVER_IP;Database=DB_NAME;User Id=DB_USER;Password=DB_USER_PASSWORD;Persist Security Info=true;TrustServerCertificate=True` |
+| virtuoso-secret | `virtuosoRead` | Cadena de conexión para Virtuoso | `HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000` |
+| rabbitmq-secret | `connectionString` | Cadena de conexión para RabbitMQ | `amqp://USER:PASSWORD@SERVER_IP:5672/VIRTUAL_HOST` |
 | identity-secret | `scope` | Ámbito necesario para crear un token para el Identity y poder realizar peticiones a servicios internos | `apiidentity` |
 
 Ver [SECRETS.md](./docs/SECRETS.md) para la lista completa.
@@ -118,7 +119,7 @@ Los servicios que se despliegan son:
 |Servicio de archivos	| StatefulSet | Aplicación Web que se encarga de almacenar y servir las ontologías de la plataforma. |
 |	Servicio autocompletar | Deployment + Service | Aplicación Web que se encarga de generar las sugerencias de búsqueda de una faceta concreta.
 |	Servicio autocompletar etiquetas | Deployment + Service |
-|	Servicio refresco cache | Deployment | Aplicación de segundo plano que se encarga de invalidar las cachés que necesitan ser actualizadas. | 
+|	Servicio refresco cache | Deployment | Aplicación de segundo plano que se encarga de invalidar las cachés que necesitan ser actualizadas. |
 |	Servicio muro comunidad | Deployment | Aplicación de segundo plano que se encarga de generar la actividad reciente de cada comunidad. |
 | API despliegues	| Deployment |
 | Servicio distribuidor de eventos internos	|Deployment| Aplicación de segundo plano que recibe un evento de creación o edición de un recurso y notifica al resto de servicios que tienen que realizar alguna acción
@@ -132,7 +133,7 @@ Los servicios que se despliegan son:
 |Servicio Oauth	| Deployment | Aplicación Web que se encarga de validar las firmas Oauth que le llegan a la Web o el API.
 |Servicio replicación	| Deployment | plicación de segundo plano que permite la alta disponibilidad de lectura. | 
 |Servicio resultados	| Deployment + Service | Aplicación Web que se encarga de mostrar los resultados en una página de búsqueda.|
-| Servicio base 	| Deployment | Aplicación de segundo plano que se encarga de insertar en el grafo de búsqueda los triples de cada elemento que se cree en la comunidad (recurso, persona, etc). 
+| Servicio base 	| Deployment | Aplicación de segundo plano que se encarga de insertar en el grafo de búsqueda los triples de cada elemento que se cree en la comunidad (recurso, persona, etc).
 |	Servicio refresco cache sociales | Deployment | Aplicación de segundo plano que se encarga de invalidar las cachés de la bandeja de mensajes de un usuario cada vez que recibe un mensaje nuevo, para que las bandejas de mensajes estén siempre actualizadas. |
 | Servicio generación grafo búsqueda usuario	| Deployment | Aplicación de segundo plano que se encarga de insertar en el grafo de búsqueda de cada usuario los triples de los mensajes que envía y recibe dentro de la plataforma. |
 | Contenido estático	| Deployment | Contenido estático de la plataforma JS,CSS ... |

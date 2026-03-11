@@ -1,0 +1,71 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: services-gnoss-ingress
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
+spec:
+  ingressClassName: "nginx"
+  {{- if .Values.ingress.https }}
+  tls:
+    - hosts:
+      - {{ .Values.global.hosts.services }}
+      secretName: {{ .Values.secrets.tls.secretName }}
+  {{- end }}
+  rules:
+### SERVICIOS ###
+  - host: {{ .Values.global.hosts.services}}
+    http:
+      paths:
+      - path: /facetas(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: facetas
+            port: 
+              number: 8080
+      - path: /resultados(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: resultados
+            port: 
+              number: 8080
+      - path: /login(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: login
+            port: 
+              number: 8080
+      - path: /autocompletar(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: autocompletar
+            port: 
+              number: 8080
+      - path: /autocompletaretiquetas(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: etiquetadoautomatico
+            port:
+              number: 8080
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: api
+            port: 
+              number: 8080
+      - path: /interno/content(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: interno
+            port: 
+              number: 8080

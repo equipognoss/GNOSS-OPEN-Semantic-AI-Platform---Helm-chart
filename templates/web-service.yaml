@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    servicio: web
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  ports:
+    - name: "port-web"
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: web
+status:
+  loadBalancer: {}
