@@ -55,16 +55,16 @@ spec:
               echo 'Volume permissions OK'
           resources: {}
           volumeMounts:
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/recursos
               subPath: sockets/Recursos
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/Votos
               subPath: sockets/Votos
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/Visitas
               subPath: sockets/Visitas
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/Comentarios
               subPath: sockets/Comentarios
           terminationMessagePath: /dev/termination-log
@@ -126,7 +126,7 @@ spec:
           value: "100"
   volumeClaimTemplates:
   - metadata:
-      name: vol-gnoss
+      name: {{ include "gnoss.persistentVolumeName" . }}
       namespace: {{ .Release.Namespace | quote }}
     spec:
       accessModes: [ "ReadWriteOnce" ]

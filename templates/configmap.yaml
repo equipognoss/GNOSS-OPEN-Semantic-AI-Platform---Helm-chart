@@ -1,4 +1,3 @@
-
 #todos los contenedores de front menos identity (back y front)
 apiVersion: v1
 kind: ConfigMap
@@ -23,7 +22,7 @@ data:
   redis__bandeja__ip__read: {{ .Values.redis.read | quote }}
   redis__bandeja__bd: {{ .Values.redis.bandejaBd | quote }}
   redis__bandeja__timeout: {{ .Values.redis.bandejaTimeout | quote }}
-  Servicios__urlBase: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.ingress.hostWeb }}
+  Servicios__urlBase: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.web }}
   idiomas: "es|Español,en|English"
   connectionType: "2"       # 0 SQL SERVER, 1 Oracle, 2 PostgreSQL
   puertoVirtuoso: "8890"
@@ -31,22 +30,22 @@ data:
   PuertoServicioSocketsOffline: "1745"
   Servicios__urlFacetas: "http://facetas:8080/CargadorFacetas"
   Servicios__urlResultados: "http://resultados:8080/CargadorResultados"
-  Servicios__urlFacetas__externo: {{ printf "%s://%s/facetas/CargadorFacetas" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
-  Servicios__urlResultados__externo: {{ printf "%s://%s/resultados/CargadorResultados" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
+  Servicios__urlFacetas__externo: {{ printf "%s://%s/facetas/CargadorFacetas" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__urlResultados__externo: {{ printf "%s://%s/resultados/CargadorResultados" .Values.ingress.schema_servicios .Values.global.hosts.services }}
   Servicios__urlInterno: "http://interno:8080"
   Servicios__urlArchivos: "http://archivo:8080"
   Servicios__urlDocuments: "http://documents:8080/GestorDocumental"
-  Servicios__urlContent: {{ printf "%s://%s/content" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
-  Servicios__urlStatic: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.ingress.hostWeb }}
-  Servicios__urlApiIntegracionContinua: {{ printf "%s://%s/integracioncontinua" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
-  Servicios__urlLogin: {{ printf "%s://%s/login" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
-  Servicios__autocompletar: {{ printf "%s://%s/autocompletar/autocompletar" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
-  Servicios__urlApi: {{ printf "%s://%s/api" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
+  Servicios__urlContent: {{ printf "%s://%s/content" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__urlStatic: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.web }}
+  Servicios__urlApiIntegracionContinua: {{ printf "%s://%s/integracioncontinua" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__urlLogin: {{ printf "%s://%s/login" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__autocompletar: {{ printf "%s://%s/autocompletar/autocompletar" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__urlApi: {{ printf "%s://%s/api" .Values.ingress.schema_servicios .Values.global.hosts.services }}
   Servicios__urlOauth: "http://oauth:8080/"
   Servicios__urlDespliegues: "http://despliegues:8080/"
-  Servicios__urlServicioEtiquetas: {{ printf "%s://%s/autocompletaretiquetas" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
-  Servicios__etiquetadoAutomatico: {{ printf "%s://%s/autocompletaretiquetas/EtiquetadoAutomatico" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
-  Servicios__contextosHome: {{ printf "%s://%s/resultados/CargadorContextoMensajes" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
+  Servicios__urlServicioEtiquetas: {{ printf "%s://%s/autocompletaretiquetas" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__etiquetadoAutomatico: {{ printf "%s://%s/autocompletaretiquetas/EtiquetadoAutomatico" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__contextosHome: {{ printf "%s://%s/resultados/CargadorContextoMensajes" .Values.ingress.schema_servicios .Values.global.hosts.services }}
   schema_servicios: {{ .Values.ingress.schema_servicios }}
   https: {{ .Values.ingress.https | quote }}
   Authority: "http://identityserver:8080"

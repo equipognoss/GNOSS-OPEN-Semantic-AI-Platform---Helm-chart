@@ -48,7 +48,7 @@ spec:
               echo 'Volume permissions OK'
           resources: {}
           volumeMounts:
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/Ontologias
               subPath: ontologias
           terminationMessagePath: /dev/termination-log
@@ -97,7 +97,7 @@ spec:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: Servicios__urlBase
-          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
+          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.services }}
         - name: rutaOntologias
           value: "Ontologias/Archivos"
         ports:
@@ -105,7 +105,7 @@ spec:
           containerPort: 8080
           protocol: TCP
         volumeMounts:
-        - name: vol-gnoss
+        - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/Ontologias
           subPath: ontologias
       {{- if .Values.global.serviceAccountName }}
@@ -117,7 +117,7 @@ spec:
       {{- end }}
   volumeClaimTemplates:
   - metadata:
-      name: vol-gnoss
+      name: {{ include "gnoss.persistentVolumeName" . }}
       namespace: {{ .Release.Namespace | quote }}
     spec:
       accessModes: [ "ReadWriteOnce" ]

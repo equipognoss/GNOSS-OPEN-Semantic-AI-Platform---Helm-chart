@@ -81,7 +81,7 @@ spec:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: dominio
-          value: {{ .Values.ingress.hostWeb }}
+          value: {{ .Values.global.hosts.web }}
         ports:
         - name: "port-despliegue"
           containerPort: 8080

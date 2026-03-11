@@ -81,7 +81,7 @@ spec:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: Servicios__urlBase
-          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
+          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.services }}
         ports:
         - name: "port-results"
           containerPort: 8080

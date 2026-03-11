@@ -9,7 +9,7 @@ metadata:
   name: workflows
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.generalBack.replicas }}
+  replicas: {{ .Values.workflows.replicas }}
   selector:
     matchLabels:
       app: workflows

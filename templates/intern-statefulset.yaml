@@ -52,16 +52,16 @@ spec:
               echo 'Volume permissions OK'
           resources: {}
           volumeMounts:
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/doclinks
               subPath: doclinks
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/imagenes
               subPath: imagenes
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/ImagenesEnlaces
               subPath: ImagenesEnlaces
-            - name: vol-gnoss
+            - name: {{ include "gnoss.persistentVolumeName" . }}
               mountPath: /app/Videos
               subPath: Videos
           terminationMessagePath: /dev/termination-log
@@ -110,22 +110,22 @@ spec:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: Servicios__urlBase
-          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.ingress.hostServicios }}
+          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.services }}
         ports:
         - name: "port-int-8080"
           containerPort: 8080
           protocol: TCP
         volumeMounts:
-        - name: vol-gnoss
+        - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/doclinks
           subPath: doclinks
-        - name: vol-gnoss
+        - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/imagenes
           subPath: imagenes
-        - name: vol-gnoss
+        - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/ImagenesEnlaces
           subPath: ImagenesEnlaces
-        - name: vol-gnoss
+        - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/Videos
           subPath: Videos
       {{- if .Values.global.serviceAccountName }}
@@ -137,7 +137,7 @@ spec:
       {{- end }}
   volumeClaimTemplates:
   - metadata:
-      name: vol-gnoss
+      name: {{ include "gnoss.persistentVolumeName" . }}
       namespace: {{ .Release.Namespace | quote }}
     spec:
       accessModes: [ "ReadWriteOnce" ]
