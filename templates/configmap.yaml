@@ -52,6 +52,7 @@ data:
   scopeIdentity: {{ .Values.secrets.identity.scope }}
   clientIDIdentity: {{ .Values.secrets.identity.clientID }}
   clientSecretIdentity: {{ .Values.secrets.identity.clientSecret }}
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: {{ .Values.ingress.forwardedheaders | quote }}
 
 
 ---
