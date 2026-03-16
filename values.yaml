@@ -103,10 +103,6 @@ web:
   restartPolicy: Always
   tolerations: null
   affinity: null
-  logs:
-    enabled: true
-    size: "1Gi"
-    path: "/app/logs"
 
 login:
   replicas: 1

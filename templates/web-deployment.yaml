@@ -117,18 +117,10 @@ spec:
           containerPort: 8080
           protocol: TCP
         volumeMounts:
-        {{- if .Values.web.logs.enabled }}
-          - name: logs-volume
-            mountPath: {{ .Values.web.logs.path | quote }}
-        {{- end }}
           - name: robotstxt
             mountPath: /app/wwwroot/robots.txt
             subPath: robots.txt
       volumes:
-      {{- if .Values.web.logs.enabled }}
-        - name: logs-volume
-          mountPath: {{ .Values.web.logs.path | quote }}
-      {{- end }}
         - name: robotstxt
           configMap:
             name: robotstxt-config
