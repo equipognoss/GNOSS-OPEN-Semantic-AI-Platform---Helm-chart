@@ -1,33 +1,35 @@
-###########################
-#  SEARCHGRAPHGENERATION  #
-###########################
+#########
+#       #
+#  API  #
+#       #
+#########
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: searchgraphgeneration
-  name: searchgraphgeneration
+    app: api
+  name: api
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.generalBack.replicas }}
+  replicas: {{ .Values.api.replicas }}
   selector:
     matchLabels:
-      app: searchgraphgeneration
+      app: api
   template:
     metadata:
       labels:
-        app: searchgraphgeneration
+        app: api
     spec:
-      {{ if or (.Values.searchgraphgeneration.tolerations) (.Values.general.extraTolerations) }}
+      {{ if or (.Values.api.tolerations) (.Values.general.extraTolerations) }}
       tolerations:
-      {{- with .Values.searchgraphgeneration.tolerations }}
+      {{- with .Values.api.tolerations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.general.extraTolerations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- end }}
-      {{- $cacheAffinity := default dict .Values.searchgraphgeneration.affinity }}
+      {{- $cacheAffinity := default dict .Values.api.affinity }}
       {{- $extraAffinity := default dict .Values.general.extraAffinity }}
       {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
       {{- if $mergedAffinity }}
@@ -36,25 +38,18 @@ spec:
       {{- end }}
       securityContext:
         fsGroupChangePolicy: OnRootMismatch
-      {{- if .Values.global.serviceAccountName }}
-      serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
-      {{- end }}
-      {{- with .Values.general.imagePullSecrets }}
-      imagePullSecrets:
-      {{ toYaml . | nindent 8 }}
-      {{- end }}
       containers:
-      - name: searchgraphgeneration
-        image: {{ printf "%s:%s" .Values.searchgraphgeneration.image .Values.searchgraphgeneration.tag }}
-        imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
-        {{- if .Values.searchgraphgeneration.limitsEnabled | quote }}
+      - name: api
+        image: {{ printf "%s:%s" .Values.api.image .Values.api.tag }}
+        imagePullPolicy: {{ .Values.api.pullPolicy }}
+        {{- if .Values.api.limitsEnabled | quote }}
         resources:
           limits:
-            memory: {{ .Values.searchgraphgeneration.limitMemory }}
-            cpu: {{ .Values.searchgraphgeneration.limitCpu }}
+            memory: {{ .Values.api.limitMemory }}
+            cpu: {{ .Values.api.limitCpu }}
           requests:
-            memory: {{ .Values.searchgraphgeneration.requestMemory }}
-            cpu: {{ .Values.searchgraphgeneration.requestCpu }}
+            memory: {{ .Values.api.requestMemory }}
+            cpu: {{ .Values.api.requestCpu }}
         {{- end }}
         envFrom:
           - configMapRef:
@@ -70,6 +65,11 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.sql.name }}
               key: {{ .Values.secrets.sql.base.secretKey }}
+        - name: oauth
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.sql.name }}
+              key: {{ .Values.secrets.sql.oauth.secretKey }}
         - name: virtuosoConnectionString
           valueFrom:
             secretKeyRef:
@@ -89,7 +89,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
-              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
+              key: {{ .Values.secrets.virtuoso.write2.secretKey }}        
         - name: RabbitMQ__colaServiciosWin
           valueFrom:
             secretKeyRef:
@@ -100,5 +100,30 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.rabbitmq.name }}
               key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
-        - name: intervalo
-          value: "100"
+        - name: scopeIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.scope.secretKey }}
+        - name: clientIDIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientID.secretKey }}
+        - name: clientSecretIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientSecret.secretKey }}
+        ports:
+        - name: "port-api"
+          containerPort: 8080
+          protocol: TCP
+      restartPolicy: {{ .Values.api.restartPolicy }}
+      {{- if .Values.global.serviceAccountName }}
+      serviceAccountName: {{ .Values.global.serviceAccountName }}
+      {{- end }}
+      {{- with .Values.general.imagePullSecrets }}
+      imagePullSecrets:
+      {{ toYaml . | nindent 8 }}
+      {{- end }}

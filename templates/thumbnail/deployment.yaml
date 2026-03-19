@@ -1,33 +1,33 @@
-##################
-#  CACHEREFRESH  #
-##################
+#########################
+#  THUMBNAILGENERATOR   #
+#########################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: cacherefresh
-  name: cacherefresh
+    app: thumbnailgenerator
+  name: thumbnailgenerator
   namespace: {{ .Release.Namespace | quote }}
 spec:
   replicas: {{ .Values.generalBack.replicas }}
   selector:
     matchLabels:
-      app: cacherefresh
+      app: thumbnailgenerator
   template:
     metadata:
       labels:
-        app: cacherefresh
+        app: thumbnailgenerator
     spec:
-      {{ if or (.Values.cacherefresh.tolerations) (.Values.general.extraTolerations) }}
+      {{ if or (.Values.thumbnailgenerator.tolerations) (.Values.general.extraTolerations) }}
       tolerations:
-      {{- with .Values.cacherefresh.tolerations }}
+      {{- with .Values.thumbnailgenerator.tolerations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.general.extraTolerations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- end }}
-      {{- $cacheAffinity := default dict .Values.cacherefresh.affinity }}
+      {{- $cacheAffinity := default dict .Values.thumbnailgenerator.affinity }}
       {{- $extraAffinity := default dict .Values.general.extraAffinity }}
       {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
       {{- if $mergedAffinity }}
@@ -44,17 +44,17 @@ spec:
       {{ toYaml . | nindent 8 }}
       {{- end }}
       containers:
-      - name: cacherefresh
-        image: {{ printf "%s:%s" .Values.cacherefresh.image .Values.cacherefresh.tag }}
+      - name: thumbnailgenerator
+        image: {{ printf "%s:%s" .Values.thumbnailgenerator.image .Values.thumbnailgenerator.tag }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
-        {{- if .Values.cacherefresh.limitsEnabled | quote }}
+        {{- if .Values.thumbnailgenerator.limitsEnabled | quote }}
         resources:
           limits:
-            memory: {{ .Values.cacherefresh.limitMemory }}
-            cpu: {{ .Values.cacherefresh.limitCpu }}
+            memory: {{ .Values.thumbnailgenerator.limitMemory }}
+            cpu: {{ .Values.thumbnailgenerator.limitCpu }}
           requests:
-            memory: {{ .Values.cacherefresh.requestMemory }}
-            cpu: {{ .Values.cacherefresh.requestCpu }}
+            memory: {{ .Values.thumbnailgenerator.requestMemory }}
+            cpu: {{ .Values.thumbnailgenerator.requestCpu }}
         {{- end }}
         envFrom:
           - configMapRef:
@@ -95,5 +95,20 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.rabbitmq.name }}
               key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
+        - name: scopeIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.scope.secretKey }}
+        - name: clientIDIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientID.secretKey }}
+        - name: clientSecretIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientSecret.secretKey }}
         - name: intervalo
           value: "100"
