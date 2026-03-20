@@ -1,35 +1,35 @@
-#################
-#               #
-#  API-INTERNA  #
-#               #
-#################
+#########
+#       #
+#  WEB  #
+#       #
+#########
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: api-interna
-  name: api-interna
+    app: web
+  name: web
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.api.replicas }}
+  replicas: {{ .Values.web.replicas }}
   selector:
     matchLabels:
-      app: api-interna
+      app: web
   template:
     metadata:
       labels:
-        app: api-interna
+        app: web
     spec:
-      {{ if or (.Values.api.tolerations) (.Values.general.extraTolerations) }}
+      {{ if or (.Values.web.tolerations) (.Values.general.extraTolerations) }}
       tolerations:
-      {{- with .Values.api.tolerations }}
+      {{- with .Values.web.tolerations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.general.extraTolerations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- end }}
-      {{- $cacheAffinity := default dict .Values.api.affinity }}
+      {{- $cacheAffinity := default dict .Values.web.affinity }}
       {{- $extraAffinity := default dict .Values.general.extraAffinity }}
       {{- $mergedAffinity := merge $cacheAffinity $extraAffinity }}
       {{- if $mergedAffinity }}
@@ -39,17 +39,17 @@ spec:
       securityContext:
         fsGroupChangePolicy: OnRootMismatch
       containers:
-      - name: api
-        image: {{ printf "%s:%s" .Values.api.image .Values.api.tag }}
-        imagePullPolicy: {{ .Values.api.pullPolicy }}
-        {{- if .Values.api.limitsEnabled | quote }}
+      - name: web
+        image: {{ printf "%s:%s" .Values.web.image .Values.web.tag }}
+        imagePullPolicy: {{ .Values.web.pullPolicy }}
+        {{- if .Values.web.limitsEnabled | quote }}
         resources:
           limits:
-            memory: {{ .Values.api.limitMemory }}
-            cpu: {{ .Values.api.limitCpu }}
+            memory: {{ .Values.web.limitMemory }}
+            cpu: {{ .Values.web.limitCpu }}
           requests:
-            memory: {{ .Values.api.requestMemory }}
-            cpu: {{ .Values.api.requestCpu }}
+            memory: {{ .Values.web.requestMemory }}
+            cpu: {{ .Values.web.requestCpu }}
         {{- end }}
         envFrom:
           - configMapRef:
@@ -100,13 +100,51 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.rabbitmq.name }}
               key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
-        - name: Servicios__urlApi
-          value: "http://api-interna:8080"
+        - name: scopeIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.scope.secretKey }}
+        - name: clientIDIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientID.secretKey }}
+        - name: clientSecretIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientSecret.secretKey }}
+        - name: idiomas
+          value: "es|Español,en|English,ca|Català,eu|Euskara,gl|Galego,fr|Français"
+        - name: intervalo
+          value: "100"
+        - name: Servicios__urlStatic
+          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.web }}
+        - name: Servicios__contextosHome
+          value: {{ printf "%s://%s/resultados/CargadorContextoMensajes" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+        - name: Servicios__etiquetadoAutomatico
+          value: {{ printf "%s://%s/autocompletaretiquetas/EtiquetadoAutomatico" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+        - name: dominio
+          value: {{ .Values.global.hosts.web }}
         ports:
-        - name: "port-api"
+        - name: "port-web"
           containerPort: 8080
           protocol: TCP
-      restartPolicy: {{ .Values.api.restartPolicy }}
+        volumeMounts:
+          - name: robotstxt
+            mountPath: /app/wwwroot/robots.txt
+            subPath: robots.txt
+      volumes:
+        - name: robotstxt
+          configMap:
+            name: robotstxt-config
+            items:
+              - key: robots.txt
+                path: robots.txt
+        - name: logs-volume
+          emptyDir: {}
+      restartPolicy: {{ .Values.web.restartPolicy }}
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
       {{- end }}

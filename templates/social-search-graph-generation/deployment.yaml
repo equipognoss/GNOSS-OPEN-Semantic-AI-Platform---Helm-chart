@@ -95,5 +95,20 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.rabbitmq.name }}
               key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
+        - name: scopeIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.scope.secretKey }}
+        - name: clientIDIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientID.secretKey }}
+        - name: clientSecretIdentity
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.identity.name }}
+              key: {{ .Values.secrets.identity.clientSecret.secretKey }}
         - name: intervalo
           value: "100"

@@ -49,9 +49,6 @@ data:
   schema_servicios: {{ .Values.ingress.schema_servicios }}
   https: {{ .Values.ingress.https | quote }}
   Authority: "http://identityserver:8080"
-  scopeIdentity: {{ .Values.secrets.identity.scope }}
-  clientIDIdentity: {{ .Values.secrets.identity.clientID }}
-  clientSecretIdentity: {{ .Values.secrets.identity.clientSecret }}
   ASPNETCORE_FORWARDEDHEADERS_ENABLED: {{ .Values.ingress.forwardedheaders | quote }}
 
 
