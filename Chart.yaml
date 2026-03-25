@@ -1,5 +1,5 @@
 apiVersion: v2
-name: gnoss-core
+name: gnoss-open-core
 description: Despliege de GNOSS OPEN CORE
 home: //docker.gnoss.com/helm-charts/gnoss-open-core
 maintainers:
