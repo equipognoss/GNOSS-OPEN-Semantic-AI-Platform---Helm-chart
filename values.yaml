@@ -79,6 +79,8 @@ general:
   #           - master1
   #           - master2
   imagePullSecrets: null
+  user: 2000
+  group: 2000
 
 ######################################
 #                                    #
