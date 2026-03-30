@@ -6,23 +6,19 @@ Este chart de Helm permite desplegar todas las aplicaciones que forman GNOSS Sem
 
 El chart se encarga de desplegar todos los objetos de Kubernetes necesarios para el funcionamiento de la plataforma, a excepción de las bases de datos y los secretos.
 
-Los componentes que forman parte del chart son:
+Los principales tipos de objetos que forman parte del chart son:
 
--  **Gateway:** permite gestionar la comunicación del exterior con el interior del clúster, definiendo diferentes dominios y reglas para enrutar las peticiones a los servicios correspondientes.
--  **HTTPRoute:** uno de los tipos de enrutamiento que permite configurar un Gateway para dirigir el trafico de las peticiones desde el Gateway al objeto de API correspondiente, por ejemplo a un Service.
+-  **Ingress:** permite gestionar la comunicación del exterior con el interior del clúster, definiendo diferentes dominios y reglas para enrutar las peticiones a los servicios correspondientes.
 -  **Service:** permite exponer como un servicio a la red aquellas aplicaciones que se ejecutan en uno o mas pods
 -  **Deployment:** las configuraciones de cada una de las aplicaciones que se ejecutan dentro del clúster en pods
 -  **StatefulSet:** igual que un Deployment gestiona las aplicaciones que se ejecutan en pods, pero es especifico para aplicaciones que necesitan estado, como puede ser acceso a almacenamiento persistente en disco.
 -  **ConfigMap:** usado para gestionar las variables de entorno no secretas en forma de clave-valor
--  **Role:** los roles de los controles de permisos necesarios para un control RBAC
--  **RoleBinding:** la asignación de los roles en RBAC
 -  **Values:** valores estándar de configuración no secretos.
 
 ## Prerrequisitos
 
 - Kubernetes 1.34+
 - Helm 3.18+
-- NGINX Gateway Fabric 1.5+ instalado
 - PV provisioner
 - Certificados TLS (si usa HTTPS)
 - Bases de datos:
