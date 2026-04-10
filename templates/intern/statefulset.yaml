@@ -37,36 +37,11 @@ spec:
       #  runAsUser: 1000
       #  allowPrivilegeEscalation: false
         fsGroupChangePolicy: OnRootMismatch
-      initContainers:
-        - name: volumepermissions
-          image: busybox
-          command:
-            - sh
-            - '-c'
-            - |
-              chmod -R 777 /app/doclinks 
-              chmod -R 777 /app/imagenes 
-              chmod -R 777 /app/ImagenesEnlaces 
-              chmod -R 777 /app/Videos 
-
-              echo 'Volume permissions OK'
-          resources: {}
-          volumeMounts:
-            - name: {{ include "gnoss.persistentVolumeName" . }}
-              mountPath: /app/doclinks
-              subPath: doclinks
-            - name: {{ include "gnoss.persistentVolumeName" . }}
-              mountPath: /app/imagenes
-              subPath: imagenes
-            - name: {{ include "gnoss.persistentVolumeName" . }}
-              mountPath: /app/ImagenesEnlaces
-              subPath: ImagenesEnlaces
-            - name: {{ include "gnoss.persistentVolumeName" . }}
-              mountPath: /app/Videos
-              subPath: Videos
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          imagePullPolicy: IfNotPresent
+      securityContext:
+        runAsUser: {{ .Values.general.user }}
+        runAsGroup: {{ .Values.general.group }}
+        fsGroup: {{ .Values.general.group }}
+        fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: interno
         image: {{ printf "%s:%s" .Values.interno.image .Values.interno.tag }}
@@ -104,11 +79,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
-        - name: Virtuoso__Escritura__Virtuoso2
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.secrets.virtuoso.name }}
-              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: Servicios__urlBase
           value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.services }}
         ports:

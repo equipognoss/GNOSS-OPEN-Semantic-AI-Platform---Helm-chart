@@ -75,11 +75,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
-        - name: Virtuoso__Escritura__Virtuoso2
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.secrets.virtuoso.name }}
-              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: scopeIdentity
           valueFrom:
             secretKeyRef:

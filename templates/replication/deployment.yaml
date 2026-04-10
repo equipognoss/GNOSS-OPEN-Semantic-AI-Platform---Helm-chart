@@ -80,11 +80,25 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
-        - name: Virtuoso__Escritura__Virtuoso2
+        {{- with .Values.replication.colasReplicacionMaster }}
+        {{- range . }}
+        - name: {{ printf "ColaReplicacionMaster_%s" .nombreCola }}
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.secrets.virtuoso.name }}
-              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
+              name: {{ $.Values.secrets.virtuoso.name }}
+              key: {{ .secretKey }}
+        {{- end }}
+        {{- end }}
+
+        {{- with .Values.replication.colasReplicacionMasterHome }}
+        {{- range . }}
+        - name: {{ printf "ColaReplicacionMasterHome__%s" .nombreCola }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Values.secrets.virtuoso.name }}
+              key: {{ .secretKey }}
+        {{- end }}
+        {{- end }}
         - name: RabbitMQ__colaServiciosWin
           valueFrom:
             secretKeyRef:

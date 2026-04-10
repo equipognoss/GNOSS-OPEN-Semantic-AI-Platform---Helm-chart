@@ -32,6 +32,9 @@ spec:
       {{ toYaml $mergedAffinity | nindent 8 }}
       {{- end }}
       securityContext:
+        runAsUser: {{ .Values.general.user }}
+        runAsGroup: {{ .Values.general.group }}
+        fsGroup: {{ .Values.general.group }}
         fsGroupChangePolicy: OnRootMismatch
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
@@ -40,24 +43,6 @@ spec:
       imagePullSecrets:
       {{ toYaml . | nindent 8 }}
       {{- end }}
-      initContainers:
-        - name: volumepermissions
-          image: busybox
-          command:
-            - sh
-            - '-c'
-            - |
-              chmod -R 777 /app/elementos 
-
-              echo 'Volume permissions OK'
-          resources: {}
-          volumeMounts:
-            - name: {{ include "gnoss.persistentVolumeName" . }}
-              mountPath: /app/elementos
-              subPath: live_extra
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          imagePullPolicy: IfNotPresent
       containers:
       - name: visitcluster
         image: {{ printf "%s:%s" .Values.visitcluster.image .Values.visitcluster.tag }}
@@ -95,11 +80,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
-        - name: Virtuoso__Escritura__Virtuoso2
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.secrets.virtuoso.name }}
-              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: RabbitMQ__colaServiciosWin
           valueFrom:
             secretKeyRef:

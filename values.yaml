@@ -79,6 +79,11 @@ general:
   #           - master1
   #           - master2
   imagePullSecrets: null
+  user: 2000
+  group: 2000
+  connectionType: "2"
+  replicacionActivada: true
+  replicacionActivadaHome: true
 
 ######################################
 #                                    #
@@ -447,6 +452,12 @@ replication:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  colasReplicacionMaster:
+    - nombreCola: "ColaReplica"
+      secretKey: "virtuosoReplicacionMaster1"
+  colasReplicacionMasterHome:
+    - nombreCola: ColaReplicaHome
+      secretKey: virtuosoReplicacionMasterHome1
 
 newsletters:
   image: "gnoss/gnoss.backgroundtask.newsletters.opencore"

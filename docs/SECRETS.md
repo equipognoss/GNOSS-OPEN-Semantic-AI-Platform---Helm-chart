@@ -41,4 +41,3 @@ A continuación se listan todas los posibles secrets que acepta el chart.
 	stringData:
 		virtuosoConnectionString: "HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000"
 		Virtuoso__Escritura__Virtuoso1: "HOST=SERVER_IP_1;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000"
-		Virtuoso__Escritura__Virtuoso2: "HOST=SERVER_IP_2;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000"

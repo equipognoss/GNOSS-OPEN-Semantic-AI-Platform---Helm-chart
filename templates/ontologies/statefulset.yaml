@@ -33,27 +33,9 @@ spec:
       {{ toYaml $mergedAffinity | nindent 8 }}
       {{- end }}
       securityContext:
-      #  runAsUser: 1000
-      #  allowPrivilegeEscalation: false
-        fsGroupChangePolicy: OnRootMismatch
-      initContainers:
-        - name: volumepermissions
-          image: busybox
-          command:
-            - sh
-            - '-c'
-            - |
-              chmod -R 777 /app/Ontologias
-
-              echo 'Volume permissions OK'
-          resources: {}
-          volumeMounts:
-            - name: {{ include "gnoss.persistentVolumeName" . }}
-              mountPath: /app/Ontologias
-              subPath: ontologias
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          imagePullPolicy: IfNotPresent
+        runAsUser: {{ .Values.general.user }}
+        runAsGroup: {{ .Values.general.group }}
+        fsGroup: {{ .Values.general.group }}
       containers:
       - name: ontologias 
         image: {{ printf "%s:%s" .Values.ontologias.image .Values.ontologias.tag }}
@@ -91,11 +73,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
-        - name: Virtuoso__Escritura__Virtuoso2
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.secrets.virtuoso.name }}
-              key: {{ .Values.secrets.virtuoso.write2.secretKey }}
         - name: Servicios__urlBase
           value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.services }}
         - name: rutaOntologias
