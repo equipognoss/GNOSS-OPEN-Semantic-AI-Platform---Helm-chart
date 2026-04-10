@@ -434,7 +434,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## replication
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
-|`replication.image`|`string`|"gnoss/gnoss.replication.enterprise"|Imagen Docker del servicio|
+|`replication.image`|`string`|"gnoss/gnoss.backgroundtask.replication.opencore"|Imagen Docker del servicio|
 |`replication.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
 |`replication.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`replication.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
@@ -444,6 +444,12 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`replication.requestCpu`|`string`|50m|CPU solicitada por el contenedor|
 |`replication.tolerations`|`list`|null|Toleraciones específicas del servicio|
 |`replication.affinity`|`object`|null|Reglas de afinidad específicas del servicio|
+|`replication.colasReplicacionMaster`|`list`|`[]`|Lista de colas de replicación master. Cada elemento define el nombre de la cola RabbitMQ y la key del Secret de Virtuoso con su cadena de conexión|
+|`replication.colasReplicacionMaster[].nombre`|`string`|-|Nombre de la cola RabbitMQ. Se usa como sufijo en la variable de entorno `ColaReplicacionMaster_{nombre}`|
+|`replication.colasReplicacionMaster[].secretKey`|`string`|-|Key dentro del Secret de Virtuoso que contiene la cadena de conexión|
+|`replication.colasReplicacionMasterHome`|`list`|`[]`|Lista de colas de replicación master home. Cada elemento define el nombre de la cola RabbitMQ y la key del Secret de Virtuoso con su cadena de conexión|
+|`replication.colasReplicacionMasterHome[].nombre`|`string`|-|Nombre de la cola RabbitMQ. Se usa como sufijo en la variable de entorno `ColaReplicacionMasterHome__{nombre}`|
+|`replication.colasReplicacionMasterHome[].secretKey`|`string`|-|Key dentro del Secret de Virtuoso que contiene la cadena de conexión|
 
 ## newsletters
 | Clave | Tipo | Valor por defecto | Descripción|

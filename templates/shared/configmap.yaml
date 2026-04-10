@@ -50,7 +50,8 @@ data:
   https: {{ .Values.ingress.https | quote }}
   Authority: "http://identityserver:8080"
   ASPNETCORE_FORWARDEDHEADERS_ENABLED: {{ .Values.ingress.forwardedheaders | quote }}
-
+  replicacionActivada: {{ .Values.general.replicacionActivada | quote }}
+  replicacionActivadaHome: {{ .Values.general.replicacionActivadaHome | quote }}
 
 ---
 # Configuracion para el robots.txt
