@@ -114,6 +114,13 @@ spec:
         - name: "port-api"
           containerPort: 8080
           protocol: TCP
+        volumeMounts:
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: api
       restartPolicy: {{ .Values.api.restartPolicy }}
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{ .Values.global.serviceAccountName }}

@@ -36,6 +36,7 @@ spec:
         runAsUser: {{ .Values.general.user }}
         runAsGroup: {{ .Values.general.group }}
         fsGroup: {{ .Values.general.group }}
+        fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: ontologias 
         image: {{ printf "%s:%s" .Values.ontologias.image .Values.ontologias.tag }}
@@ -85,6 +86,12 @@ spec:
         - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/Ontologias
           subPath: ontologias
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: ontologias
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
       {{- end }}

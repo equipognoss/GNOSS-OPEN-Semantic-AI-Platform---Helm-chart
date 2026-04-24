@@ -9,7 +9,7 @@ metadata:
   name: mailservice
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.generalBack.replicas }}
+  replicas: {{ .Values.mailservice.replicas }}
   selector:
     matchLabels:
       app: mailservice
@@ -92,3 +92,10 @@ spec:
               key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
         - name: intervalo
           value: "100"
+        volumeMounts:
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: mailservice

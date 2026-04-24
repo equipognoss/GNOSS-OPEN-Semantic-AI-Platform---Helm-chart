@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oauth
+data:
+  appsettings.json: |
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Error"
+        }
+      },
+      "Serilog": {
+        "MinimumLevel": {
+          "Default": {{ .Values.oauth.logLevel.default | quote }},
+          "Override": {
+            {{- $first := true }}
+            {{- range $namespace, $level := .Values.oauth.logLevel.overrides }}
+            {{- if not $first }},{{ end }}
+            {{ $namespace | quote }}: {{ $level | quote }}
+            {{- $first = false }}
+            {{- end }}
+          }
+        }
+      }
+    }

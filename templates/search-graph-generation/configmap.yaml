@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: searchgraphgeneration
+data:
+  appsettings.json: |
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Error"
+        }
+      },
+      "Serilog": {
+        "MinimumLevel": {
+          "Default": {{ .Values.searchgraphgeneration.logLevel.default | quote }},
+          "Override": {
+            {{- $first := true }}
+            {{- range $namespace, $level := .Values.searchgraphgeneration.logLevel.overrides }}
+            {{- if not $first }},{{ end }}
+            {{ $namespace | quote }}: {{ $level | quote }}
+            {{- $first = false }}
+            {{- end }}
+          }
+        }
+      }
+    }

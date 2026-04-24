@@ -9,7 +9,7 @@ metadata:
   name: distributor
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.generalBack.replicas }}
+  replicas: {{ .Values.distributor.replicas }}
   selector:
     matchLabels:
       app: distributor
@@ -92,3 +92,10 @@ spec:
               key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
         - name: intervalo
           value: "100"
+        volumeMounts:
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: distributor

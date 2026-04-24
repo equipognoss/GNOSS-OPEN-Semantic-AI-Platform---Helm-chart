@@ -69,3 +69,10 @@ spec:
             name: interno
             port: 
               number: 8080
+      - path: /despliegues(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: despliegues
+            port: 
+              number: 8080

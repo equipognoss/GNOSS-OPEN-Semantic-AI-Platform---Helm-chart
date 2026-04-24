@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: visitcluster
+data:
+  appsettings.json: |
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Error"
+        }
+      },
+      "Serilog": {
+        "MinimumLevel": {
+          "Default": {{ .Values.visitcluster.logLevel.default | quote }},
+          "Override": {
+            {{- $first := true }}
+            {{- range $namespace, $level := .Values.visitcluster.logLevel.overrides }}
+            {{- if not $first }},{{ end }}
+            {{ $namespace | quote }}: {{ $level | quote }}
+            {{- $first = false }}
+            {{- end }}
+          }
+        }
+      }
+    }

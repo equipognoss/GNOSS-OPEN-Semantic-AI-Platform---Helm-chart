@@ -4,6 +4,7 @@ global:
   hosts:
     services: ""
     web: ""
+  basicAuth: false
 
 ########## SECRETS ###########
 secrets:
@@ -41,6 +42,8 @@ secrets:
       secretKey: clientSecret
   tls:
     secretName: tls-secret
+  basicAuth:
+    name: basic-auth-secret
 
 ################################
 #                              #
@@ -108,6 +111,12 @@ web:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"    
 
 login:
   replicas: 1
@@ -122,6 +131,12 @@ login:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 facetas:
   replicas: 1
@@ -136,6 +151,12 @@ facetas:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 results:
   replicas: 1
@@ -150,6 +171,12 @@ results:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 autocompletar:
   replicas: 1
@@ -164,6 +191,12 @@ autocompletar:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 despliegues:
   replicas: 1
@@ -178,6 +211,12 @@ despliegues:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 api:
   replicas: 1
@@ -192,6 +231,12 @@ api:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 oauth:
   replicas: 1
@@ -206,6 +251,12 @@ oauth:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 identityserver:
   replicas: 1
@@ -220,6 +271,12 @@ identityserver:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 etiquetadoautomatico:
   replicas: 1
@@ -234,6 +291,12 @@ etiquetadoautomatico:
   restartPolicy: Always
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 ###########################################
 #                                         #
@@ -256,6 +319,12 @@ documents:
   espacioVol: "5Gi"
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 interno:
   replicas: 1
@@ -270,6 +339,12 @@ interno:
   espacioVol: "5Gi"
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 ontologias:
   replicas: 1
@@ -284,6 +359,12 @@ ontologias:
   espacioVol: "5Gi"
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
   
 visitregistry:
   replicas: 1
@@ -299,6 +380,12 @@ visitregistry:
   espacioVol: "5Gi"
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 visitcluster:
   replicas: 1
@@ -314,6 +401,12 @@ visitcluster:
   espacioVol: "5Gi"
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 ####################################
 #                                  #
@@ -323,7 +416,6 @@ visitcluster:
 
 
 generalBack:
-  replicas: 1
   restartPolicy: Always
   pullPolicy: IfNotPresent
 
@@ -339,6 +431,12 @@ mailservice:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 cacherefresh:
   replicas: 1
@@ -352,6 +450,12 @@ cacherefresh:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 
 distributor:
@@ -366,6 +470,12 @@ distributor:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 
 searchgraphgeneration:
@@ -380,8 +490,15 @@ searchgraphgeneration:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 thumbnailgenerator:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.thumbnailgenerator.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -392,8 +509,15 @@ thumbnailgenerator:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 communitywall:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.communitywall.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -404,8 +528,15 @@ communitywall:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 socialcacherefresh:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.socialcacherefresh.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -416,8 +547,15 @@ socialcacherefresh:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 socialsearchgraphgeneration:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.socialsearchgraphgeneration.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -428,8 +566,15 @@ socialsearchgraphgeneration:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 subscriptionsmail:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.subscriptionsmail.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -440,8 +585,15 @@ subscriptionsmail:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 replication:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.replication.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -452,6 +604,12 @@ replication:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
   colasReplicacionMaster:
     - nombreCola: "ColaReplica"
       secretKey: "virtuosoReplicacionMaster1"
@@ -460,6 +618,7 @@ replication:
       secretKey: virtuosoReplicacionMasterHome1
 
 newsletters:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.newsletters.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -470,8 +629,15 @@ newsletters:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 userwall:
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.userwall.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -482,9 +648,15 @@ userwall:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 workflows:
-  replicas: 1
+  replicas: 0
   image: "gnoss/gnoss.backgroundtask.workflows.opencore"
   tag: "6.1.5"
   pullPolicy: IfNotPresent
@@ -495,6 +667,12 @@ workflows:
   requestMemory: 125Mi
   tolerations: null
   affinity: null
+  logLevel:
+    default: "Information"
+    overrides:
+      "Microsoft": "Warning"
+      "Microsoft.Hosting.Lifetime": "Information"
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 
 ######################################

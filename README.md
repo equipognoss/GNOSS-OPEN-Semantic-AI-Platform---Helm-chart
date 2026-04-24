@@ -37,7 +37,7 @@ Los principales tipos de objetos que forman parte del chart son:
 | `Release.namespace` | Namespace donde se despliega | Valor fijado por el sistema de despliegue |
 | `ingress.https` | Habilitar HTTPS |  |
 | `ingress.forwardedheaders` | Valor que se le da a la variable ASPNETCORE_FORWARDEDHEADERS_ENABLED para que llegue el schema a la app |  |
-| `global..hosts.web` | Hostname para web |  |
+| `global.hosts.web` | Hostname para web |  |
 | `global.hosts.services` | Hostname para servicios |  |
 
 Ver [VALUES.md](./docs/VALUES.md) para la lista completa.

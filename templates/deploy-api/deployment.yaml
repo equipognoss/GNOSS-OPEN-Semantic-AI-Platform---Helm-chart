@@ -96,6 +96,13 @@ spec:
         - name: "port-despliegue"
           containerPort: 8080
           protocol: TCP
+        volumeMounts:
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: despliegues
       restartPolicy: {{ .Values.despliegues.restartPolicy }}
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{  .Values.global.serviceAccountName | quote }}

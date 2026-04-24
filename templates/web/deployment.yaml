@@ -130,6 +130,8 @@ spec:
           - name: robotstxt
             mountPath: /app/wwwroot/robots.txt
             subPath: robots.txt
+          - name: logs-config
+            mountPath: /app/logging-config
       volumes:
         - name: robotstxt
           configMap:
@@ -137,8 +139,9 @@ spec:
             items:
               - key: robots.txt
                 path: robots.txt
-        - name: logs-volume
-          emptyDir: {}
+        - name: logs-config
+          configMap:
+            name: web
       restartPolicy: {{ .Values.web.restartPolicy }}
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{  .Values.global.serviceAccountName | quote }}

@@ -8,6 +8,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`global.storageClassName`|`string`|"csi-cephfs-sc"|Nombre del proveedor de PV, es necesario adaptarlo si se despliega fuera de la infraestructura de GNOSS|
 |`global.hosts.services`|`string`||Dominio (sin esquema) en el que se desea que respondan los servicios del proyecto, debe definirse en cada proyecto y entorno.|
 |`global.hosts.web`|`string`||Dominio (sin esquema) en el que se desea que respondan la web del proyecto, debe definirse en cada proyecto y entorno.|
+|`global.hosts.basicAuth`|`boolean`||Indica si esta activa la autenticación básica en el dominio de la web, por defecto esta desactivada|
 
 ## secrets
 | Clave | Tipo | Valor por defecto | Descripción|
@@ -192,6 +193,9 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`identityserver.tolerations`|`list`|null|Toleraciones específicas del servicio|
 |`identityserver.affinity`|`object`|null|Reglas de afinidad específicas del servicio|
 
+## deploy
+| Clave | Tipo | Valor por defecto | Descripción|
+| -- | -- | -- | --|
 
 ## etiquetadoautomatico
 | Clave | Tipo | Valor por defecto | Descripción|
@@ -265,7 +269,6 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## generalBack
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
-|`generalBack.replicas`|`int`|1|Número de réplicas por defecto para los servicios back|
 |`generalBack.restartPolicy`|`string`|Always|Política de reinicio por defecto para los servicios back|
 |`generalBack.pullPolicy`|`string`|IfNotPresent|Política de descarga de imagen por defecto para los servicios back|
 

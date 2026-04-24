@@ -6,6 +6,10 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: 100m
     nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
+    {{- if .Values.global.basicAuth }}
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: {{ .Values.secrets.basicAuth.name }}
+    {{- end }}
 spec:
   ingressClassName: "nginx"
   {{- if .Values.ingress.https }}

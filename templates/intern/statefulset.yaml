@@ -34,10 +34,6 @@ spec:
       {{ toYaml $mergedAffinity | nindent 8 }}
       {{- end }}
       securityContext:
-      #  runAsUser: 1000
-      #  allowPrivilegeEscalation: false
-        fsGroupChangePolicy: OnRootMismatch
-      securityContext:
         runAsUser: {{ .Values.general.user }}
         runAsGroup: {{ .Values.general.group }}
         fsGroup: {{ .Values.general.group }}
@@ -98,6 +94,12 @@ spec:
         - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/Videos
           subPath: Videos
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: interno
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
       {{- end }}

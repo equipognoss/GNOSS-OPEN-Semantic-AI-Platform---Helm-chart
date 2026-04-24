@@ -84,6 +84,12 @@ spec:
         - name: {{ include "gnoss.persistentVolumeName" . }}
           mountPath: /app/Documentacion
           subPath: documentacion
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: documents
       {{- if .Values.global.serviceAccountName }}
       serviceAccountName: {{  .Values.global.serviceAccountName | quote }}
       {{- end }}

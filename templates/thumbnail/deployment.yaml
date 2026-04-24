@@ -9,7 +9,7 @@ metadata:
   name: thumbnailgenerator
   namespace: {{ .Release.Namespace | quote }}
 spec:
-  replicas: {{ .Values.generalBack.replicas }}
+  replicas: {{ .Values.thumbnailgenerator.replicas }}
   selector:
     matchLabels:
       app: thumbnailgenerator
@@ -107,3 +107,10 @@ spec:
               key: {{ .Values.secrets.identity.clientSecret.secretKey }}
         - name: intervalo
           value: "100"
+        volumeMounts:
+        - name: logs-config
+          mountPath: /app/logging-config
+      volumes:
+        - name: logs-config
+          configMap:
+            name: thumbnailgenerator
