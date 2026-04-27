@@ -24,7 +24,7 @@ data:
   redis__bandeja__timeout: {{ .Values.redis.bandejaTimeout | quote }}
   Servicios__urlBase: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.web }}
   idiomas: "es|Español,en|English"
-  connectionType: {{ .Values.general.connectionType }}       # 0 SQL SERVER, 1 Oracle, 2 PostgreSQL
+  connectionType: {{ .Values.general.connectionType | quote }}      # 0 SQL SERVER, 1 Oracle, 2 PostgreSQL
   puertoVirtuoso: "8890"
   puertoVirtuosoAux: "1111"
   PuertoServicioSocketsOffline: "1745"

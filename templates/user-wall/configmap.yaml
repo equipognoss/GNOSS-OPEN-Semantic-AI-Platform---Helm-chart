@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: userwall
+data:
+  appsettings.json: |
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Error"
+        }
+      },
+      "Serilog": {
+        "MinimumLevel": {
+          "Default": {{ .Values.userwall.logLevel.default | quote }},
+          "Override": {
+            {{- $first := true }}
+            {{- range $namespace, $level := .Values.userwall.logLevel.overrides }}
+            {{- if not $first }},{{ end }}
+            {{ $namespace | quote }}: {{ $level | quote }}
+            {{- $first = false }}
+            {{- end }}
+          }
+        }
+      }
+    }
