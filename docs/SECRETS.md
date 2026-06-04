@@ -27,8 +27,11 @@ A continuación se listan todas los posibles secrets que acepta el chart.
 | Nombre secret | Clave secret | Ejemplo | Descripción |
 | -- | -- | -- | -- |
 | identity-secret | scope | apiidentity | Ámbito necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
-| identity-secret | clientID | Web | ClientID necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
-| identity-secret | clientSecret | ClientSecret | ClientSecret necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
+| identity-secret | clientID | 00000000-0000-0000-0000-000000000000 | ClientID necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
+| identity-secret | clientSecret | 00000000-0000-0000-0000-000000000000 | ClientSecret necesario para crear un token para el Identity que posteriormente se utilizará para realizar peticiones a servicios internos |
+> [!note]
+> El `scope` por compatibilidad debe tener siempre el valor `apiidentity`
+
 
 ## Ejemplo de implementación
 ### Fichero secrets.yml
