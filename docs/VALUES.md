@@ -40,7 +40,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## general
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
-|`general.tag`|`string`|"5.21.05"|Versión general de la aplicación|
+|`general.tag`|`string`|"6.1.19"|Versión general de la aplicación|
 |`general.extraTolerations`|`list`|null|Lista de toleraciones adicionales que se añadirán a las toleraciones específicas de cada servicio|
 |`general.extraAffinity`|`object`|null|Reglas de afinidad adicionales que se combinarán con las reglas de afinidad específicas de cada servicio|
 |`general.imagePullSecrets`|`list`|null|Lista de secretos de K8s usados para autenticarse en registros de imágenes privados|
@@ -52,7 +52,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`web.replicas`|`int`|1|Número de réplicas del servicio|
 |`web.image`|`string`|"gnoss/gnoss.web.enterprise"|Imagen Docker del servicio|
-|`web.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`web.tag`|`string`|""|Tag de la imagen Docker|
 |`web.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`web.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`web.limitMemory`|`string`|6000Mi|Límite de memoria del contenedor|
@@ -71,7 +71,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`login.replicas`|`int`|1|Número de réplicas del servicio|
 |`login.image`|`string`|"gnoss/gnoss.login.enterprise"|Imagen Docker del servicio|
-|`login.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`login.tag`|`string`|""|Tag de la imagen Docker|
 |`login.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`login.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`login.limitMemory`|`string`|600Mi|Límite de memoria del contenedor|
@@ -87,7 +87,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`facetas.replicas`|`int`|1|Número de réplicas del servicio|
 |`facetas.image`|`string`|"gnoss/gnoss.facets.enterprise"|Imagen Docker del servicio|
-|`facetas.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`facetas.tag`|`string`|""|Tag de la imagen Docker|
 |`facetas.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`facetas.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`facetas.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
@@ -103,7 +103,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`results.replicas`|`int`|1|Número de réplicas del servicio|
 |`results.image`|`string`|"gnoss/gnoss.results.enterprise"|Imagen Docker del servicio|
-|`results.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`results.tag`|`string`|""|Tag de la imagen Docker|
 |`results.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`results.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`results.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
@@ -119,7 +119,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`autocompletar.replicas`|`int`|1|Número de réplicas del servicio|
 |`autocompletar.image`|`string`|"gnoss/gnoss.autocomplete.enterprise"|Imagen Docker del servicio|
-|`autocompletar.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`autocompletar.tag`|`string`|""|Tag de la imagen Docker|
 |`autocompletar.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`autocompletar.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`autocompletar.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -135,7 +135,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`despliegues.replicas`|`int`|1|Número de réplicas del servicio|
 |`despliegues.image`|`string`|"gnoss/gnoss.deploy.enterprise"|Imagen Docker del servicio|
-|`despliegues.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`despliegues.tag`|`string`|""|Tag de la imagen Docker|
 |`despliegues.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`despliegues.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`despliegues.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -151,7 +151,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`api.replicas`|`int`|1|Número de réplicas del servicio|
 |`api.image`|`string`|"gnoss/gnoss.api.enterprise"|Imagen Docker del servicio|
-|`api.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`api.tag`|`string`|""|Tag de la imagen Docker|
 |`api.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`api.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`api.limitMemory`|`string`|1Gi|Límite de memoria del contenedor|
@@ -167,7 +167,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`oauth.replicas`|`int`|1|Número de réplicas del servicio|
 |`oauth.image`|`string`|"gnoss/gnoss.oauth.enterprise"|Imagen Docker del servicio|
-|`oauth.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`oauth.tag`|`string`|""|Tag de la imagen Docker|
 |`oauth.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`oauth.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`oauth.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
@@ -183,7 +183,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`identityserver.replicas`|`int`|1|Número de réplicas del servicio|
 |`identityserver.image`|`string`|"gnoss/gnoss.identityserver.enterprise"|Imagen Docker del servicio|
-|`identityserver.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`identityserver.tag`|`string`|""|Tag de la imagen Docker|
 |`identityserver.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`identityserver.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`identityserver.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -203,7 +203,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`etiquetadoautomatico.replicas`|`int`|1|Número de réplicas del servicio|
 |`etiquetadoautomatico.image`|`string`|"gnoss/gnoss.etiquetadoautomatico.enterprise"|Imagen Docker del servicio|
-|`etiquetadoautomatico.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`etiquetadoautomatico.tag`|`string`|""|Tag de la imagen Docker|
 |`etiquetadoautomatico.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`etiquetadoautomatico.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`etiquetadoautomatico.limitMemory`|`string`|200Mi|Límite de memoria del contenedor|
@@ -224,7 +224,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`documents.replicas`|`int`|1|Número de réplicas del servicio|
 |`documents.image`|`string`|"gnoss/gnoss.documents.enterprise"|Imagen Docker del servicio|
-|`documents.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`documents.tag`|`string`|""|Tag de la imagen Docker|
 |`documents.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`documents.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
 |`documents.limitCpu`|`string`|2|Límite de CPU del contenedor|
@@ -240,7 +240,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`interno.replicas`|`int`|1|Número de réplicas del servicio|
 |`interno.image`|`string`|"gnoss/gnoss.intern.enterprise"|Imagen Docker del servicio|
-|`interno.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`interno.tag`|`string`|""|Tag de la imagen Docker|
 |`interno.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`interno.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
 |`interno.limitCpu`|`string`|500m|Límite de CPU del contenedor|
@@ -256,7 +256,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`ontologias.replicas`|`int`|1|Número de réplicas del servicio|
 |`ontologias.image`|`string`|"gnoss/gnoss.ontologies.enterprise"|Imagen Docker del servicio|
-|`ontologias.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`ontologias.tag`|`string`|""|Tag de la imagen Docker|
 |`ontologias.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`ontologias.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
 |`ontologias.limitCpu`|`string`|500m|Límite de CPU del contenedor|
@@ -278,7 +278,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`mailservice.replicas`|`int`|1|Número de réplicas del servicio|
 |`mailservice.image`|`string`|"gnoss/gnoss.mail.enterprise"|Imagen Docker del servicio|
-|`mailservice.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`mailservice.tag`|`string`|""|Tag de la imagen Docker|
 |`mailservice.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`mailservice.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`mailservice.limitMemory`|`string`|600Mi|Límite de memoria del contenedor|
@@ -293,7 +293,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`cacherefresh.replicas`|`int`|1|Número de réplicas del servicio|
 |`cacherefresh.image`|`string`|"gnoss/gnoss.cacherefresh.enterprise"|Imagen Docker del servicio|
-|`cacherefresh.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`cacherefresh.tag`|`string`|""|Tag de la imagen Docker|
 |`cacherefresh.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`cacherefresh.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`cacherefresh.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
@@ -308,7 +308,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`distributor.replicas`|`int`|1|Número de réplicas del servicio|
 |`distributor.image`|`string`|"gnoss/gnoss.distributor.enterprise"|Imagen Docker del servicio|
-|`distributor.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`distributor.tag`|`string`|""|Tag de la imagen Docker|
 |`distributor.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`distributor.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`distributor.limitMemory`|`string`|600Mi|Límite de memoria del contenedor|
@@ -323,7 +323,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`searchgraphgeneration.replicas`|`int`|1|Número de réplicas del servicio|
 |`searchgraphgeneration.image`|`string`|"gnoss/gnoss.searchgraphgeneration.enterprise"|Imagen Docker del servicio|
-|`searchgraphgeneration.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`searchgraphgeneration.tag`|`string`|""|Tag de la imagen Docker|
 |`searchgraphgeneration.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`searchgraphgeneration.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`searchgraphgeneration.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
@@ -338,7 +338,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`visitcluster.replicas`|`int`|1|Número de réplicas del servicio|
 |`visitcluster.image`|`string`|"gnoss/gnoss.visitcluster.enterprise"|Imagen Docker del servicio|
-|`visitcluster.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`visitcluster.tag`|`string`|""|Tag de la imagen Docker|
 |`visitcluster.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`visitcluster.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`visitcluster.limitMemory`|`string`|600Mi|Límite de memoria del contenedor|
@@ -354,7 +354,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`visitregistry.replicas`|`int`|1|Número de réplicas del servicio|
 |`visitregistry.image`|`string`|"gnoss/gnoss.visitregistry.enterprise"|Imagen Docker del servicio|
-|`visitregistry.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`visitregistry.tag`|`string`|""|Tag de la imagen Docker|
 |`visitregistry.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`visitregistry.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`visitregistry.limitMemory`|`string`|600Mi|Límite de memoria del contenedor|
@@ -369,7 +369,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`thumbnailgenerator.image`|`string`|"gnoss/gnoss.thumbnail.enterprise"|Imagen Docker del servicio|
-|`thumbnailgenerator.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`thumbnailgenerator.tag`|`string`|""|Tag de la imagen Docker|
 |`thumbnailgenerator.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`thumbnailgenerator.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`thumbnailgenerator.limitMemory`|`string`|600Mi|Límite de memoria del contenedor|
@@ -383,7 +383,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`communitywall.image`|`string`|"gnoss/gnoss.communitywall.enterprise"|Imagen Docker del servicio|
-|`communitywall.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`communitywall.tag`|`string`|""|Tag de la imagen Docker|
 |`communitywall.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`communitywall.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`communitywall.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -397,7 +397,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`socialcacherefresh.image`|`string`|"gnoss/gnoss.socialcacherefresh.enterprise"|Imagen Docker del servicio|
-|`socialcacherefresh.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`socialcacherefresh.tag`|`string`|""|Tag de la imagen Docker|
 |`socialcacherefresh.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`socialcacherefresh.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`socialcacherefresh.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -411,7 +411,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`socialsearchgraphgeneration.image`|`string`|"gnoss/gnoss.socialsearchgraphgeneration.enterprise"|Imagen Docker del servicio|
-|`socialsearchgraphgeneration.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`socialsearchgraphgeneration.tag`|`string`|""|Tag de la imagen Docker|
 |`socialsearchgraphgeneration.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`socialsearchgraphgeneration.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`socialsearchgraphgeneration.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -425,7 +425,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`subscriptionsmail.image`|`string`|"gnoss/gnoss.subscriptionsmail.enterprise"|Imagen Docker del servicio|
-|`subscriptionsmail.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`subscriptionsmail.tag`|`string`|""|Tag de la imagen Docker|
 |`subscriptionsmail.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`subscriptionsmail.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`subscriptionsmail.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -439,7 +439,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`replication.image`|`string`|"gnoss/gnoss.backgroundtask.replication.opencore"|Imagen Docker del servicio|
-|`replication.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`replication.tag`|`string`|""|Tag de la imagen Docker|
 |`replication.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`replication.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`replication.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -459,7 +459,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`newsletters.image`|`string`|"gnoss/gnoss.newsletters.enterprise"|Imagen Docker del servicio|
-|`newsletters.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`newsletters.tag`|`string`|""|Tag de la imagen Docker|
 |`newsletters.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`newsletters.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`newsletters.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -473,7 +473,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
 |`userwall.image`|`string`|"gnoss/gnoss.userwall.enterprise"|Imagen Docker del servicio|
-|`userwall.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`userwall.tag`|`string`|""|Tag de la imagen Docker|
 |`userwall.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`userwall.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`userwall.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -488,7 +488,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 | -- | -- | -- | --|
 |`workflows.replicas`|`int`|0|Número de réplicas del servicio (0 = deshabilitado por defecto)|
 |`workflows.image`|`string`|"gnoss/gnoss.workflows.enterprise"|Imagen Docker del servicio|
-|`workflows.tag`|`string`|"5.20.14"|Tag de la imagen Docker|
+|`workflows.tag`|`string`|""|Tag de la imagen Docker|
 |`workflows.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`workflows.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`workflows.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|

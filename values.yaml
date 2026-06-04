@@ -61,7 +61,7 @@ ingress:
 #                         #
 ###########################
 general:
-  tag: "5.21.05"
+  tag: "6.1.19"
   extraTolerations: null
   # extraTolerations will be appended to service specific tolerations
   # extraTolerations:
