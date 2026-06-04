@@ -62,13 +62,6 @@ spec:
             name: api
             port: 
               number: 8080
-      - path: /interno/content(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: interno
-            port: 
-              number: 8080
       - path: /despliegues(/|$)(.*)
         pathType: ImplementationSpecific
         backend:

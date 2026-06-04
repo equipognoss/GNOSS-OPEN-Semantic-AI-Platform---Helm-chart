@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: intern-gnoss-ingress
+  namespace: {{ .Release.Namespace }}
+spec:
+  ingressClassName: "nginx"
+  {{- if .Values.ingress.https }}
+  tls:
+    - hosts:
+      - {{ .Values.global.hosts.services }}
+      secretName: {{ .Values.secrets.tls.secretName }}
+  {{- end }}
+  rules:
+  - host: {{ .Values.global.hosts.services}}
+    http:
+      paths:
+      - path: /content(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: interno
+            port: 
+              number: 8080
