@@ -175,11 +175,11 @@ kubectl describe secret gnoss-tls-cert -n produccion
 
 ## FAQ
 
-**P: ¿Puedo usar mi propio Gateway existente?**
-R: Sí, puedes desactivar la creación del Gateway...
+**P: ¿Como actualizo la versión de la aplicación?**
+R: La versión se controla mediante el value `.Values.general.tag` que define la versión para todos los servicios, excepto si tiene valor el value de cada servicio, por ejemplo, `.Values.web.tag`, en ese caso se usara la versión concreta para ese servicio.
 
-**P: ¿Cómo expongo solo ciertos endpoints?**
-R: Modifica los HTTPRoutes en `templates/httproutes.yaml`...
+Esto permite actualizar la versión globalmente y actualizar servicios concretos.
+
 
 ## Licencia
 
