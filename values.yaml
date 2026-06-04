@@ -659,7 +659,7 @@ userwall:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 workflows:
-  replicas: 0
+  replicas: 1
   image: "gnoss/gnoss.backgroundtask.workflows.opencore"
   tag: ""
   pullPolicy: IfNotPresent
