@@ -70,6 +70,11 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.read.secretKey }}
+        - name: virtuosoConnectionString_home
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.virtuoso.name }}
+              key: {{ .Values.secrets.virtuoso.readHome.secretKey }}
         - name: Virtuoso__Escritura__Virtuoso1
           valueFrom:
             secretKeyRef:
