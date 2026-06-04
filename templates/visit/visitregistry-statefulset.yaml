@@ -92,6 +92,12 @@ spec:
               key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
         - name: intervalo
           value: "100"
+        - name: puertoUDP
+          value: {{ .Values.visitregistry.udpPort | quote }}
+        ports:
+        - containerPort: {{ .Values.visitregistry.udpPort | int }}
+          protocol: UDP
+          name: udp-visits
         volumeMounts:
         - name: logs-config
           mountPath: /app/logging-config

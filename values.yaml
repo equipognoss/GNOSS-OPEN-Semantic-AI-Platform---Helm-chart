@@ -382,6 +382,7 @@ visitregistry:
   espacioVol: "5Gi"
   tolerations: null
   affinity: null
+  udpPort: 1745
   logLevel:
     default: "Information"
     overrides:

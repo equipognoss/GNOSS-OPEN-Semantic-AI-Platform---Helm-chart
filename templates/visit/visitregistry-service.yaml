@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: visitregistry
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    app: visitregistry
+spec:
+  selector:
+    app: visitregistry
+  ports:
+  - port: {{ .Values.visitregistry.udpPort | int }}
+    targetPort: {{ .Values.visitregistry.udpPort | int }}
+    protocol: UDP
+    name: udp-visits
+  clusterIP: None
