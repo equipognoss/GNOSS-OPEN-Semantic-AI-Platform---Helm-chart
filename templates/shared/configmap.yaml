@@ -44,7 +44,8 @@ data:
   Servicios__urlOauth: "http://oauth:8080/"
   Servicios__urlDespliegues: "http://despliegues:8080/"
   Servicios__urlServicioEtiquetas: {{ printf "%s://%s/autocompletaretiquetas" .Values.ingress.schema_servicios .Values.global.hosts.services }}
-  Servicios__etiquetadoAutomatico: {{ printf "%s://%s/autocompletaretiquetas/EtiquetadoAutomatico" .Values.ingress.schema_servicios .Values.global.hosts.services }}
+  Servicios__etiquetadoAutomatico: "http://etiquetadoautomatico:8080/EtiquetadoAutomatico"
+  Servicios__etiquetadoAutomatico__externo: {{ printf "%s://%s/autocompletaretiquetas/EtiquetadoAutomatico" .Values.ingress.schema_servicios .Values.global.hosts.services }}
   Servicios__contextosHome: {{ printf "%s://%s/resultados/CargadorContextoMensajes" .Values.ingress.schema_servicios .Values.global.hosts.services }}
   schema_servicios: {{ .Values.ingress.schema_servicios }}
   https: {{ .Values.ingress.https | quote }}
