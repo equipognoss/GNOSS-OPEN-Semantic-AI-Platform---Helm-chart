@@ -80,6 +80,16 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
+        - name: RabbitMQ__colaServiciosWin
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.rabbitmq.name }}
+              key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
+        - name: RabbitMQ__colaReplicacion
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secrets.rabbitmq.name }}
+              key: {{ .Values.secrets.rabbitmq.connectionString.secretKey }}
         - name: scopeIdentity
           valueFrom:
             secretKeyRef:
