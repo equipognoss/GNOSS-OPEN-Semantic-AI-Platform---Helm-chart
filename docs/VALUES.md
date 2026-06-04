@@ -46,6 +46,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`general.imagePullSecrets`|`list`|null|Lista de secretos de K8s usados para autenticarse en registros de imágenes privados|
 |`general.user`|`int`| ID del usuario con el que se ejecuta el contenedor, debe coincidir con el mismo que usa la imagen. No debería cambiarse a no ser que cambie en la imagen|
 |`general.group`|`int`| ID del grupo con el que se ejecuta el contenedor, debe coincidir con el mismo que usa la imagen. No debería cambiarse a no ser que cambie en la imagen|
+|`general.language`|`string`| Idiomas disponibles en la plataforma con el formato `clave_idioma1|nombre_idioma1,clave_idioma2|nombre_idioma2`los idiomas deben ser de entre los 10 soportados por la plataforma|
 
 ## web
 | Clave | Tipo | Valor por defecto | Descripción|

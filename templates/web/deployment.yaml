@@ -110,8 +110,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.identity.name }}
               key: {{ .Values.secrets.identity.clientSecret.secretKey }}
-        - name: idiomas
-          value: "es|Español,en|English,ca|Català,eu|Euskara,gl|Galego,fr|Français"
         - name: intervalo
           value: "100"
         - name: Servicios__urlStatic

@@ -86,6 +86,7 @@ general:
   user: 2000
   group: 2000
   connectionType: "2"
+  language: "es|Español,en|English,ca|Català,eu|Euskara,gl|Galego"
   replicacionActivada: true
   replicacionActivadaHome: true
 
