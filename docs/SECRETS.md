@@ -16,7 +16,6 @@ A continuación se listan todas los posibles secrets que acepta el chart.
 | virtuoso-secret | virtuosoReadHome | HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000 | Cadena de conexión que utilizará la aplicación para conectarse al Virtuoso de la Home, donde se guarda información acerca de la actividad reciente |
 | virtuoso-secret | virtuosoWriteHome | HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000 | Cadena de conexión que utilizará la aplicación para escribir en el Virtuoso de la Home, donde se guarda información acerca de la actividad reciente |
 | virtuoso-secret| virtuosoWrite1 | HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000 | Cadena de conexión que utilizará la aplicación para escribir en el Virtuoso 1 cuando la replicación esté activada |
-| virtuoso-secret | virtuosoWrite2| HOST=SERVER_IP;UID=USER;PWD=PASSWORD;Pooling=true;Max Pool Size=10;Connection Lifetime=15000 | Cadena de conexión que utilizará la aplicación para escribir en el Virtuoso 2 cuando la replicación esté activada |
 
 ## RabbitMQ
 | Nombre secret | Clave secret | Ejemplo | Descripción |
