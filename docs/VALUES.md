@@ -40,6 +40,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## general
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`general.tag`|`string`|"5.21.05"|Versión general de la aplicación|
 |`general.extraTolerations`|`list`|null|Lista de toleraciones adicionales que se añadirán a las toleraciones específicas de cada servicio|
 |`general.extraAffinity`|`object`|null|Reglas de afinidad adicionales que se combinarán con las reglas de afinidad específicas de cada servicio|
 |`general.imagePullSecrets`|`list`|null|Lista de secretos de K8s usados para autenticarse en registros de imágenes privados|
