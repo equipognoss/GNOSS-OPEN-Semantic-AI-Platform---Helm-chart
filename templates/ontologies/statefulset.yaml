@@ -39,7 +39,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: ontologias 
-        image: {{ printf "%s:%s" .Values.ontologias.image .Values.ontologias.tag }}
+        image: {{ printf "%s:%s" .Values.ontologias.image (default .Values.general.tag .Values.ontologias.tag) }}
         imagePullPolicy: {{ .Values.generalstatefulset.pullPolicy }}
         {{- if .Values.ontologias.limitsEnabled | quote }}
         resources:

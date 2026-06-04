@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: distributor
-        image: {{ printf "%s:%s" .Values.distributor.image .Values.distributor.tag }}
+        image: {{ printf "%s:%s" .Values.distributor.image (default .Values.general.tag .Values.distributor.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.distributor.limitsEnabled | quote }}
         resources:

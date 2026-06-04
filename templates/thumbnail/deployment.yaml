@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: thumbnailgenerator
-        image: {{ printf "%s:%s" .Values.thumbnailgenerator.image .Values.thumbnailgenerator.tag }}
+        image: {{ printf "%s:%s" .Values.thumbnailgenerator.image (default .Values.general.tag .Values.thumbnailgenerator.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.thumbnailgenerator.limitsEnabled | quote }}
         resources:

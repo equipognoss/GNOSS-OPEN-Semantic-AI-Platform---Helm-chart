@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: userwall
-        image: {{ printf "%s:%s" .Values.userwall.image .Values.userwall.tag }}
+        image: {{ printf "%s:%s" .Values.userwall.image (default .Values.general.tag .Values.userwall.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.userwall.limitsEnabled | quote }}
         resources:

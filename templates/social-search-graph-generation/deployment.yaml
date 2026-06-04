@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: socialsearchgraphgeneration
-        image: {{ printf "%s:%s" .Values.socialsearchgraphgeneration.image .Values.socialsearchgraphgeneration.tag }}
+        image: {{ printf "%s:%s" .Values.socialsearchgraphgeneration.image (default .Values.general.tag .Values.socialsearchgraphgeneration.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.socialsearchgraphgeneration.limitsEnabled | quote }}
         resources:

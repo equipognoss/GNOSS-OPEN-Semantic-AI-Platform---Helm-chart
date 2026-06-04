@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: cacherefresh
-        image: {{ printf "%s:%s" .Values.cacherefresh.image .Values.cacherefresh.tag }}
+        image: {{ printf "%s:%s" .Values.cacherefresh.image (default .Values.general.tag .Values.cacherefresh.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.cacherefresh.limitsEnabled | quote }}
         resources:

@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: identityserver
-        image: {{ printf "%s:%s" .Values.identityserver.image .Values.identityserver.tag }}
+        image: {{ printf "%s:%s" .Values.identityserver.image (default .Values.general.tag .Values.identityserver.tag) }}
         imagePullPolicy: {{ .Values.identityserver.pullPolicy }}
         {{- if .Values.identityserver.limitsEnabled | quote }}
         resources:

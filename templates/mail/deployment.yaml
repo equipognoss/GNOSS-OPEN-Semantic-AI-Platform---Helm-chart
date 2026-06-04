@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: mailservice
-        image: {{ printf "%s:%s" .Values.mailservice.image .Values.mailservice.tag }}
+        image: {{ printf "%s:%s" .Values.mailservice.image (default .Values.general.tag .Values.mailservice.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.mailservice.limitsEnabled | quote }}
         resources:

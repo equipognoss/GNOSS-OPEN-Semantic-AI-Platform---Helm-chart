@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: newsletters
-        image: {{ printf "%s:%s" .Values.newsletters.image .Values.newsletters.tag }}
+        image: {{ printf "%s:%s" .Values.newsletters.image (default .Values.general.tag .Values.newsletters.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.newsletters.limitsEnabled | quote }}
         resources:

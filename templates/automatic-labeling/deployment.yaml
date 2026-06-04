@@ -38,7 +38,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: etiquetadoautomatico
-        image: {{ printf "%s:%s" .Values.etiquetadoautomatico.image .Values.etiquetadoautomatico.tag }}
+        image: {{ printf "%s:%s" .Values.etiquetadoautomatico.image (default .Values.general.tag .Values.etiquetadoautomatico.tag) }}
         imagePullPolicy: {{ .Values.etiquetadoautomatico.pullPolicy }}
         {{- if .Values.etiquetadoautomatico.limitsEnabled | quote }}
         resources:

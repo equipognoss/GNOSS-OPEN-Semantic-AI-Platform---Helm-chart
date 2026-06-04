@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: facetas
-        image: {{ printf "%s:%s" .Values.facetas.image .Values.facetas.tag }}
+        image: {{ printf "%s:%s" .Values.facetas.image (default .Values.general.tag .Values.facetas.tag) }}
         imagePullPolicy: {{ .Values.facetas.pullPolicy }}
         {{- if .Values.facetas.limitsEnabled | quote }}
         resources:

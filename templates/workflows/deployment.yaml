@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: workflows
-        image: {{ printf "%s:%s" .Values.workflows.image .Values.workflows.tag }}
+        image: {{ printf "%s:%s" .Values.workflows.image (default .Values.general.tag .Values.workflows.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.workflows.limitsEnabled | quote }}
         resources:

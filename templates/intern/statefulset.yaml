@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: interno
-        image: {{ printf "%s:%s" .Values.interno.image .Values.interno.tag }}
+        image: {{ printf "%s:%s" .Values.interno.image (default .Values.general.tag .Values.interno.tag) }}
         imagePullPolicy: {{ .Values.generalstatefulset.pullPolicy }}
         {{- if .Values.interno.limitsEnabled | quote }}
         resources:

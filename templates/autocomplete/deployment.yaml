@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: autocompletar
-        image: {{ printf "%s:%s" .Values.autocompletar.image .Values.autocompletar.tag }}
+        image: {{ printf "%s:%s" .Values.autocompletar.image (default .Values.general.tag .Values.autocompletar.tag) }}
         imagePullPolicy: {{ .Values.autocompletar.pullPolicy }}
         {{- if .Values.autocompletar.limitsEnabled | quote }}
         resources:

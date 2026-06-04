@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: visitcluster
-        image: {{ printf "%s:%s" .Values.visitcluster.image .Values.visitcluster.tag }}
+        image: {{ printf "%s:%s" .Values.visitcluster.image (default .Values.general.tag .Values.visitcluster.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.visitcluster.limitsEnabled | quote }}
         resources:

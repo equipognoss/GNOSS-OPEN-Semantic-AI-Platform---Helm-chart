@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: visitregistry
-        image: {{ printf "%s:%s" .Values.visitregistry.image .Values.visitregistry.tag }}
+        image: {{ printf "%s:%s" .Values.visitregistry.image (default .Values.general.tag .Values.visitregistry.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.visitregistry.limitsEnabled | quote }}
         resources:

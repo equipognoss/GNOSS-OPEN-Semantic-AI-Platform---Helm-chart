@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: login
-        image: {{ printf "%s:%s" .Values.login.image .Values.login.tag }}
+        image: {{ printf "%s:%s" .Values.login.image (default .Values.general.tag .Values.login.tag) }}
         imagePullPolicy: {{ .Values.login.pullPolicy }}
         {{- if .Values.login.limitsEnabled | quote }}
         resources:

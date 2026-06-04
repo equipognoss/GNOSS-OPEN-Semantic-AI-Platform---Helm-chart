@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: api
-        image: {{ printf "%s:%s" .Values.api.image .Values.api.tag }}
+        image: {{ printf "%s:%s" .Values.api.image (default .Values.general.tag .Values.api.tag) }}
         imagePullPolicy: {{ .Values.api.pullPolicy }}
         {{- if .Values.api.limitsEnabled | quote }}
         resources:

@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: communitywall
-        image: {{ printf "%s:%s" .Values.communitywall.image .Values.communitywall.tag }}
+        image: {{ printf "%s:%s" .Values.communitywall.image (default .Values.general.tag .Values.communitywall.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.communitywall.limitsEnabled | quote }}
         resources:

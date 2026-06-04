@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: oauth
-        image: {{ printf "%s:%s" .Values.oauth.image .Values.oauth.tag }}
+        image: {{ printf "%s:%s" .Values.oauth.image (default .Values.general.tag .Values.oauth.tag) }}
         imagePullPolicy: {{ .Values.oauth.pullPolicy }}
         {{- if .Values.oauth.limitsEnabled | quote }}
         resources:

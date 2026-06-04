@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: replication
-        image: {{ printf "%s:%s" .Values.replication.image .Values.replication.tag }}
+        image: {{ printf "%s:%s" .Values.replication.image (default .Values.general.tag .Values.replication.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.replication.limitsEnabled | quote }}
         resources:

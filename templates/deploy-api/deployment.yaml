@@ -40,7 +40,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
       - name: despliegues
-        image: {{ printf "%s:%s" .Values.despliegues.image .Values.despliegues.tag }}
+        image: {{ printf "%s:%s" .Values.despliegues.image (default .Values.general.tag .Values.despliegues.tag) }}
         imagePullPolicy: {{ .Values.despliegues.pullPolicy }}
         {{- if .Values.despliegues.limitsEnabled | quote }}
         resources:

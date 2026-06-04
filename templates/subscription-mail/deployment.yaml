@@ -45,7 +45,7 @@ spec:
       {{- end }}
       containers:
       - name: subscriptionsmail
-        image: {{ printf "%s:%s" .Values.subscriptionsmail.image .Values.subscriptionsmail.tag }}
+        image: {{ printf "%s:%s" .Values.subscriptionsmail.image (default .Values.general.tag .Values.subscriptionsmail.tag) }}
         imagePullPolicy: {{ .Values.generalBack.pullPolicy }}
         {{- if .Values.subscriptionsmail.limitsEnabled | quote }}
         resources:
