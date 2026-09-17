@@ -109,36 +109,36 @@ Gnoss Semantic AI Platform esta formado por una gran cantidad de servicios que t
 
 ![Diagrama de objetos desplegados](docs/images/block-deploy-overview.png  "Diagrama de objetos desplegados")
 Los servicios que se despliegan son:
-| Nombre | Objetos Kubernetes | Descripción
-| -- | -- | -- |
-|Gnoss API | Deployment + Service | Aplicación Web que ofrece un interfaz de programación para que otras aplicaciones puedan realizar consultas o modificaciones en los datos almacenados en la plataforma de manera automatizada. |
-|Servicio de archivos	| StatefulSet | Aplicación Web que se encarga de almacenar y servir las ontologías de la plataforma. |
-|	Servicio autocompletar | Deployment + Service | Aplicación Web que se encarga de generar las sugerencias de búsqueda de una faceta concreta.
-|	Servicio autocompletar etiquetas | Deployment + Service |
-|	Servicio refresco cache | Deployment | Aplicación de segundo plano que se encarga de invalidar las cachés que necesitan ser actualizadas. |
-|	Servicio muro comunidad | Deployment | Aplicación de segundo plano que se encarga de generar la actividad reciente de cada comunidad. |
-| API despliegues	| Deployment |
-| Servicio distribuidor de eventos internos	|Deployment| Aplicación de segundo plano que recibe un evento de creación o edición de un recurso y notifica al resto de servicios que tienen que realizar alguna acción
-|Servicio de documentos	|StatefulSet| Aplicación de segundo plano que recibe un evento de creación o edición de un recurso y notifica al resto de servicios que tienen que realizar alguna acción
-|Servicio facetas	| Deployment + Service | Aplicación Web que se encarga de mostrar los filtros de búsqueda (facetas) disponibles en una página de búsqueda.|
-|Identity Server	| Deployment | Aplicación Web que se encarga de proveer y validar los tokens de acceso para acceder a las aplicaciones de uso interno (intern, ontologies y documents).
-| Servicio interno 	| StatefulSet + Service | Aplicación Web que se encarga de almacenar el contenido estático (imágenes, vídeos y pdfs principalmente) que suben los usuarios desde la Web
-|Servicio login	|Deployment + Service | Aplicación Web que se encarga de autenticar al usuario, validar su contraseña y enviar las credenciales a la Web.
-|Servicio envio correos	| Deployment | Aplicación de segundo plano que se encarga de enviar todos los emails que se mandan a través de la plataforma. |
-|Servicio envio newsletters	| Deployment | Aplicación de segundo plano que se encarga de enviar a todos los usuarios de una comunidad los emails de una newsletter. |
-|Servicio Oauth	| Deployment | Aplicación Web que se encarga de validar las firmas Oauth que le llegan a la Web o el API.
-|Servicio replicación	| Deployment | plicación de segundo plano que permite la alta disponibilidad de lectura. | 
-|Servicio resultados	| Deployment + Service | Aplicación Web que se encarga de mostrar los resultados en una página de búsqueda.|
-| Servicio base 	| Deployment | Aplicación de segundo plano que se encarga de insertar en el grafo de búsqueda los triples de cada elemento que se cree en la comunidad (recurso, persona, etc).
-|	Servicio refresco cache sociales | Deployment | Aplicación de segundo plano que se encarga de invalidar las cachés de la bandeja de mensajes de un usuario cada vez que recibe un mensaje nuevo, para que las bandejas de mensajes estén siempre actualizadas. |
-| Servicio generación grafo búsqueda usuario	| Deployment | Aplicación de segundo plano que se encarga de insertar en el grafo de búsqueda de cada usuario los triples de los mensajes que envía y recibe dentro de la plataforma. |
-| Contenido estático	| Deployment | Contenido estático de la plataforma JS,CSS ... |
-| Servicio suscripciones | Deployment | Aplicación de segundo plano que se encarga de generar los boletines de suscripciones de los usuarios que tienen alguna suscripción activa. |
-| Servicio generador de miniaturas | Deployment | Aplicación de segundo plano que se encarga de generar las miniaturas de las imágenes que suben los usuarios a los recursos. |
-| Servicio muro usuario	| Deployment | Aplicación de segundo plano que se encarga de generar la actividad reciente relativa a todas las comunidades que pertenece un usuario en su muro de la plataforma, habitualmente en la home de la plataforma. |
-|	Servicio recuento visitas | Deployment | Aplicación de segundo plano que se encarga de insertar en base de datos las visitas que ha contabilizado el servicio Visit Registry. |
-|	Servicio registro visitas | Deployment | Aplicación de segundo plano que expone un puerto UDP, al que la Web le envía las visitas a cada recurso.
-|Gnoss Web | Deployment + Service | Es la aplicación principal de la plataforma GNOSS. Se encarga de gestionar la autorización de los usuarios a las páginas de la plataforma, la navegación por la web, mantener la sesión del usuario, la carga del menú de la aplicación web con las opciones que el usuario tiene disponibles, etc. |
+| Nombre | Servicio | Plantillas | Objetos Kubernetes | Descripción
+| -- | -- | -- | -- | -- |
+|Gnoss API | api | templates/api | Deployment + Service | Aplicación Web que ofrece un interfaz de programación para que otras aplicaciones puedan realizar consultas o modificaciones en los datos almacenados en la plataforma de manera automatizada. |
+|Servicio de archivos | ontologias | templates/ontologies | StatefulSet | Aplicación Web que se encarga de almacenar y servir las ontologías de la plataforma. |
+|	Servicio autocompletar | autocompletar | templates/autocomplete | Deployment + Service | Aplicación Web que se encarga de generar las sugerencias de búsqueda de una faceta concreta.
+|	Servicio autocompletar etiquetas | etiquetadoautomatico | templates/automatic-labeling | Deployment + Service | Aplicación Web que se encarga de proponer las etiquetas de los recursos. |
+|	Servicio refresco cache | cacherefresh | templates/cache-refresh | Deployment | Aplicación de segundo plano que se encarga de invalidar las cachés que necesitan ser actualizadas. |
+|	Servicio muro comunidad | communitywall | templates/community-wall | Deployment | Aplicación de segundo plano que se encarga de generar la actividad reciente de cada comunidad. |
+| API despliegues	| despliegues | templates/deploy-api | Deployment + Service | Aplicación Web que gestiona la subida de los distintos paquetes de configuración en los despliegues. |
+| Servicio distribuidor de eventos internos	| distributor | templates/distributor | Deployment | Aplicación de segundo plano que recibe un evento de creación o edición de un recurso y notifica al resto de servicios que tienen que realizar alguna acción
+|Servicio de documentos	| documents | templates/documents | StatefulSet | Aplicación de segundo plano que recibe un evento de creación o edición de un recurso y notifica al resto de servicios que tienen que realizar alguna acción
+|Servicio facetas	| facetas | templates/facets | Deployment + Service | Aplicación Web que se encarga de mostrar los filtros de búsqueda (facetas) disponibles en una página de búsqueda.|
+|Identity Server	| identityserver | templates/identity-server | Deployment | Aplicación Web que se encarga de proveer y validar los tokens de acceso para acceder a las aplicaciones de uso interno (intern, ontologies y documents).
+| Servicio interno 	| interno | templates/intern | StatefulSet + Service | Aplicación Web que se encarga de almacenar el contenido estático (imágenes, vídeos y pdfs principalmente) que suben los usuarios desde la Web
+|Servicio login	| login | templates/login | Deployment + Service | Aplicación Web que se encarga de autenticar al usuario, validar su contraseña y enviar las credenciales a la Web.
+|Servicio envio correos	| mailservice | templates/mail | Deployment | Aplicación de segundo plano que se encarga de enviar todos los emails que se mandan a través de la plataforma. |
+|Servicio envio newsletters	| newsletters | templates/newsletters | Deployment | Aplicación de segundo plano que se encarga de enviar a todos los usuarios de una comunidad los emails de una newsletter. |
+|Servicio Oauth	| oauth | templates/oauth | Deployment | Aplicación Web que se encarga de validar las firmas Oauth que le llegan a la Web o el API.
+|Servicio replicación	| replication | templates/replication | Deployment | Aplicación de segundo plano que permite la alta disponibilidad de lectura. | 
+|Servicio resultados	| results | templates/results | Deployment + Service | Aplicación Web que se encarga de mostrar los resultados en una página de búsqueda.|
+| Servicio base 	| searchgraphgeneration | templates/search-graph-generation | Deployment | Aplicación de segundo plano que se encarga de insertar en el grafo de búsqueda los triples de cada elemento que se cree en la comunidad (recurso, persona, etc).
+|	Servicio refresco cache sociales | socialcacherefresh | templates/social-cache-refresh | Deployment | Aplicación de segundo plano que se encarga de invalidar las cachés de la bandeja de mensajes de un usuario cada vez que recibe un mensaje nuevo, para que las bandejas de mensajes estén siempre actualizadas. |
+| Servicio generación grafo búsqueda usuario	| socialsearchgraphgeneration | templates/social-search-graph-generation | Deployment | Aplicación de segundo plano que se encarga de insertar en el grafo de búsqueda de cada usuario los triples de los mensajes que envía y recibe dentro de la plataforma. |
+| Contenido estático	| static | templates/static | Deployment | Contenido estático de la plataforma JS,CSS ... |
+| Servicio suscripciones | subscriptionsmail | templates/subscription-mail | Deployment | Aplicación de segundo plano que se encarga de generar los boletines de suscripciones de los usuarios que tienen alguna suscripción activa. |
+| Servicio generador de miniaturas | thumbnailgenerator | templates/thumbnail | Deployment | Aplicación de segundo plano que se encarga de generar las miniaturas de las imágenes que suben los usuarios a los recursos. |
+| Servicio muro usuario	| userwall | templates/user-wall | Deployment | Aplicación de segundo plano que se encarga de generar la actividad reciente relativa a todas las comunidades que pertenece un usuario en su muro de la plataforma, habitualmente en la home de la plataforma. |
+|	Servicio recuento visitas | visitcluster | templates/visit | Deployment | Aplicación de segundo plano que se encarga de insertar en base de datos las visitas que ha contabilizado el servicio Visit Registry. |
+|	Servicio registro visitas | visitregistry | templates/visit | Deployment | Aplicación de segundo plano que expone un puerto UDP, al que la Web le envía las visitas a cada recurso.
+|Gnoss Web | web | templates/web | Deployment + Service | Es la aplicación principal de la plataforma GNOSS. Se encarga de gestionar la autorización de los usuarios a las páginas de la plataforma, la navegación por la web, mantener la sesión del usuario, la carga del menú de la aplicación web con las opciones que el usuario tiene disponibles, etc. |
 
 Ver [ARCHITECTURE.md](./docs/ARCHITECTURE.md) para más detalles.
 
@@ -176,10 +176,18 @@ kubectl describe secret gnoss-tls-cert -n produccion
 ## FAQ
 
 **P: ¿Como actualizo la versión de la aplicación?**
+
 R: La versión se controla mediante el value `.Values.general.tag` que define la versión para todos los servicios, excepto si tiene valor el value de cada servicio, por ejemplo, `.Values.web.tag`, en ese caso se usara la versión concreta para ese servicio.
 
 Esto permite actualizar la versión globalmente y actualizar servicios concretos.
 
+**P: ¿Como desactivo un servicio?**
+
+R: Para desactivar un servicio que no se necesite en el proyecto se pueden seguir dos caminos:
+- Usar el value `replicas`: si se establece a `0` se crearán todos los objetos asociados al servicio pero la cantidad de pods en ejecución será 0. Es útil para desactivarlo temporalmente.
+- Usar el value `enabled`: si se establece a `false` no se creará ninguna de los objetos asociados al servicio. Útil para servicios que no se necesiten usar nunca.
+
+En ambos casos los values se definen a nivel de cada uno de los servicios, por ejemplo, `.Values.cacherefresh.enabled`
 
 ## Licencia
 
