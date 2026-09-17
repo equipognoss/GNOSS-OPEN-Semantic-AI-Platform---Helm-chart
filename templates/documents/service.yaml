@@ -6,11 +6,13 @@ metadata:
     servicio: documents
   namespace: {{ .Release.Namespace | quote }}
 spec:
+  type: NodePort
   ports:
     - name: "port-document"
       protocol: TCP
       port: 8080
       targetPort: 8080
+      nodePort: {{ .Values.documents.debugNodePort }}
   selector:
     app: documents
 status:

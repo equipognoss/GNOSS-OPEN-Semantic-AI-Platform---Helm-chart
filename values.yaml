@@ -244,6 +244,7 @@ oauth:
   replicas: 1
   image: "gnoss/gnoss.web.oauth.opencore"
   tag: ""
+  debugNodePort: 30011
   pullPolicy: IfNotPresent
   limitsEnabled: true
   limitMemory: 800Mi
@@ -264,6 +265,7 @@ identityserver:
   replicas: 1
   image: "gnoss/gnoss.web.identityserver.opencore"
   tag: ""
+  debugNodePort: 30013
   pullPolicy: IfNotPresent
   limitsEnabled: true
   limitMemory: 500Mi
@@ -312,6 +314,7 @@ documents:
   replicas: 1
   image: "gnoss/gnoss.web.documents.opencore"
   tag: ""
+  debugNodePort: 30009
   limitsEnabled: true
   limitMemory: 800Mi
   limitCpu: 2
@@ -332,6 +335,7 @@ interno:
   replicas: 1
   image: "gnoss/gnoss.web.intern.opencore"
   tag: ""
+  debugNodePort: 30007
   limitsEnabled: true
   limitMemory: 800Mi
   limitCpu: 500m
@@ -352,6 +356,7 @@ ontologias:
   replicas: 1
   image: "gnoss/gnoss.web.ontologies.opencore"
   tag: ""
+  debugNodePort: 30008
   limitsEnabled: true
   limitMemory: 500Mi
   limitCpu: 500m

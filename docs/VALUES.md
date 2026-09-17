@@ -169,6 +169,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`oauth.replicas`|`int`|1|Número de réplicas del servicio|
 |`oauth.image`|`string`|"gnoss/gnoss.oauth.enterprise"|Imagen Docker del servicio|
 |`oauth.tag`|`string`|""|Tag de la imagen Docker|
+|`oauth.debugNodePort`|`int`|30011|NodePort expuesto para depuración remota|
 |`oauth.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`oauth.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`oauth.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
@@ -185,6 +186,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`identityserver.replicas`|`int`|1|Número de réplicas del servicio|
 |`identityserver.image`|`string`|"gnoss/gnoss.identityserver.enterprise"|Imagen Docker del servicio|
 |`identityserver.tag`|`string`|""|Tag de la imagen Docker|
+|`identityserver.debugNodePort`|`int`|30013|NodePort expuesto para depuración remota|
 |`identityserver.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
 |`identityserver.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`identityserver.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
@@ -226,6 +228,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`documents.replicas`|`int`|1|Número de réplicas del servicio|
 |`documents.image`|`string`|"gnoss/gnoss.documents.enterprise"|Imagen Docker del servicio|
 |`documents.tag`|`string`|""|Tag de la imagen Docker|
+|`documents.debugNodePort`|`int`|30009|NodePort expuesto para depuración remota|
 |`documents.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`documents.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
 |`documents.limitCpu`|`string`|2|Límite de CPU del contenedor|
@@ -242,6 +245,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`interno.replicas`|`int`|1|Número de réplicas del servicio|
 |`interno.image`|`string`|"gnoss/gnoss.intern.enterprise"|Imagen Docker del servicio|
 |`interno.tag`|`string`|""|Tag de la imagen Docker|
+|`interno.debugNodePort`|`int`|30007|NodePort expuesto para depuración remota|
 |`interno.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`interno.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
 |`interno.limitCpu`|`string`|500m|Límite de CPU del contenedor|
@@ -258,6 +262,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`ontologias.replicas`|`int`|1|Número de réplicas del servicio|
 |`ontologias.image`|`string`|"gnoss/gnoss.ontologies.enterprise"|Imagen Docker del servicio|
 |`ontologias.tag`|`string`|""|Tag de la imagen Docker|
+|`ontologias.debugNodePort`|`int`|30008|NodePort expuesto para depuración remota|
 |`ontologias.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`ontologias.limitMemory`|`string`|500Mi|Límite de memoria del contenedor|
 |`ontologias.limitCpu`|`string`|500m|Límite de CPU del contenedor|

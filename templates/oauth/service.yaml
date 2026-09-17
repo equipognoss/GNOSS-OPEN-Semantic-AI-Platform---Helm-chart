@@ -6,11 +6,13 @@ metadata:
     servicio: oauth
   namespace: {{ .Release.Namespace | quote }}
 spec:
+  type: NodePort
   ports:
     - name: "port-oauth"
       protocol: TCP
       port: 8080
       targetPort: 8080
+      nodePort: {{ .Values.oauth.debugNodePort }}
   selector:
     app: oauth
 status:

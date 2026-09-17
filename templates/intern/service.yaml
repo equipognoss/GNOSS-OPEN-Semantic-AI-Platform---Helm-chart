@@ -6,11 +6,13 @@ metadata:
     servicio: interno
   namespace: {{ .Release.Namespace | quote }}
 spec:
+  type: NodePort
   ports:
     - name: "port-int-8080"
       protocol: TCP
       port: 8080
       targetPort: 8080
+      nodePort: {{ .Values.interno.debugNodePort }}
   selector:
     app: interno
 status:

@@ -6,11 +6,13 @@ metadata:
     servicio: archivo
   namespace: {{ .Release.Namespace | quote }}
 spec:
+  type: NodePort
   ports:
     - name: "port-ontologias"
       protocol: TCP
       port: 8080
       targetPort: 8080
+      nodePort: {{ .Values.ontologias.debugNodePort }}
   selector:
     app: ontologias
 status:
