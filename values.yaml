@@ -110,10 +110,10 @@ web:
   tag: ""
   pullPolicy: IfNotPresent
   limitsEnabled: true
-  limitMemory: 6000Mi
+  limitMemory: 5000Mi
   limitCpu: 4
   requestMemory: 300Mi
-  requestCpu: 200m
+  requestCpu: 500m
   restartPolicy: Always
   tolerations: null
   affinity: null
@@ -239,7 +239,7 @@ api:
   tag: ""
   pullPolicy: IfNotPresent
   limitsEnabled: true
-  limitMemory: 1Gi
+  limitMemory: 768Mi
   limitCpu: 4
   requestMemory: 125Mi
   requestCpu: 100m
@@ -262,7 +262,7 @@ oauth:
   pullPolicy: IfNotPresent
   rateLimitPermitLimit: "2000"
   limitsEnabled: true
-  limitMemory: 800Mi
+  limitMemory: 256Mi
   limitCpu: 2
   requestMemory: 125Mi
   requestCpu: 100m
@@ -284,7 +284,7 @@ identityserver:
   debugNodePort: 30013
   pullPolicy: IfNotPresent
   limitsEnabled: true
-  limitMemory: 500Mi
+  limitMemory: 384Mi
   limitCpu: 500m
   requestMemory: 100Mi
   requestCpu: 100m
