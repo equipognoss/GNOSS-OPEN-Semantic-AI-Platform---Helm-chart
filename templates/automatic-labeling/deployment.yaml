@@ -1,3 +1,4 @@
+{{- if .Values.etiquetadoautomatico.enabled }}
 ####################################
 #  ETIQUETADOAUTOMATICO (LABELER)  #
 ####################################
@@ -126,3 +127,4 @@ spec:
       imagePullSecrets:
       {{ toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}

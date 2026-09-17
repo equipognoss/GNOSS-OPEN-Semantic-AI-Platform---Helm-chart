@@ -104,6 +104,7 @@ general:
 #version-front: "5.15.7"
 
 web:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.opencore"
   tag: ""
@@ -127,6 +128,7 @@ web:
     Disallow: /
 
 login:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.login.opencore"
   tag: ""
@@ -147,6 +149,7 @@ login:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 facetas:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.facets.opencore"
   tag: ""
@@ -167,6 +170,7 @@ facetas:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 results:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.results.opencore"
   tag: ""
@@ -187,6 +191,7 @@ results:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 autocompletar:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.autocomplete.opencore"
   tag: ""
@@ -207,6 +212,7 @@ autocompletar:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 despliegues:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.deploy.opencore"
   tag: ""
@@ -227,6 +233,7 @@ despliegues:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 api:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.api.opencore"
   tag: ""
@@ -247,6 +254,7 @@ api:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 oauth:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.oauth.opencore"
   tag: ""
@@ -269,6 +277,7 @@ oauth:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 identityserver:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.identityserver.opencore"
   tag: ""
@@ -290,6 +299,7 @@ identityserver:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 etiquetadoautomatico:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.labeler.opencore"
   tag: ""
@@ -318,6 +328,7 @@ generalstatefulset:
   pullPolicy: IfNotPresent
 
 documents:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.documents.opencore"
   tag: ""
@@ -339,6 +350,7 @@ documents:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 interno:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.intern.opencore"
   tag: ""
@@ -360,6 +372,7 @@ interno:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 ontologias:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.web.ontologies.opencore"
   tag: ""
@@ -381,6 +394,7 @@ ontologias:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
   
 visitregistry:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.visitregistry.opencore"
   tag: ""
@@ -403,6 +417,7 @@ visitregistry:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 visitcluster:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.visitcluster.opencore"
   tag: ""
@@ -435,6 +450,7 @@ generalBack:
   pullPolicy: IfNotPresent
 
 mailservice:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.mail.opencore"
   tag: ""
@@ -454,6 +470,7 @@ mailservice:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 cacherefresh:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.cacherefresh.opencore"
   tag: ""
@@ -474,6 +491,7 @@ cacherefresh:
 
 
 distributor:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.distributor.opencore"
   tag: ""
@@ -494,6 +512,7 @@ distributor:
 
 
 searchgraphgeneration:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.searchgraphgeneration.opencore"
   tag: ""
@@ -513,6 +532,7 @@ searchgraphgeneration:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 thumbnailgenerator:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.thumbnailgenerator.opencore"
   tag: ""
@@ -532,6 +552,7 @@ thumbnailgenerator:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 communitywall:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.communitywall.opencore"
   tag: ""
@@ -551,6 +572,7 @@ communitywall:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 socialcacherefresh:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.socialcacherefresh.opencore"
   tag: ""
@@ -570,6 +592,7 @@ socialcacherefresh:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 socialsearchgraphgeneration:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.socialsearchgraphgeneration.opencore"
   tag: ""
@@ -589,6 +612,7 @@ socialsearchgraphgeneration:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 subscriptionsmail:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.subscriptionsmail.opencore"
   tag: ""
@@ -608,6 +632,7 @@ subscriptionsmail:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 replication:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.replication.opencore"
   tag: ""
@@ -633,6 +658,7 @@ replication:
       secretKey: virtuosoReplicacionMasterHome1
 
 newsletters:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.newsletters.opencore"
   tag: ""
@@ -652,6 +678,7 @@ newsletters:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 userwall:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.userwall.opencore"
   tag: ""
@@ -671,6 +698,7 @@ userwall:
       "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
 
 workflows:
+  enabled: true
   replicas: 1
   image: "gnoss/gnoss.backgroundtask.workflows.opencore"
   tag: ""

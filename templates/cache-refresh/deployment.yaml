@@ -1,3 +1,4 @@
+{{- if .Values.cacherefresh.enabled }}
 ##################
 #  CACHEREFRESH  #
 ##################
@@ -134,3 +135,4 @@ spec:
         - name: logs-config
           configMap:
             name: cacherefresh
+{{- end }}

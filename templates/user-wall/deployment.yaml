@@ -1,3 +1,4 @@
+{{- if .Values.userwall.enabled }}
 ##############
 #  USERWALL  #
 ##############
@@ -134,3 +135,4 @@ spec:
         - name: logs-config
           configMap:
             name: userwall
+{{- end }}

@@ -54,6 +54,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## web
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`web.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`web.replicas`|`int`|1|Número de réplicas del servicio|
 |`web.image`|`string`|"gnoss/gnoss.web.enterprise"|Imagen Docker del servicio|
 |`web.tag`|`string`|""|Tag de la imagen Docker|
@@ -74,6 +75,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## login
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`login.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`login.replicas`|`int`|1|Número de réplicas del servicio|
 |`login.image`|`string`|"gnoss/gnoss.login.enterprise"|Imagen Docker del servicio|
 |`login.tag`|`string`|""|Tag de la imagen Docker|
@@ -90,6 +92,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## facetas
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`facetas.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`facetas.replicas`|`int`|1|Número de réplicas del servicio|
 |`facetas.image`|`string`|"gnoss/gnoss.facets.enterprise"|Imagen Docker del servicio|
 |`facetas.tag`|`string`|""|Tag de la imagen Docker|
@@ -106,6 +109,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## results
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`results.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`results.replicas`|`int`|1|Número de réplicas del servicio|
 |`results.image`|`string`|"gnoss/gnoss.results.enterprise"|Imagen Docker del servicio|
 |`results.tag`|`string`|""|Tag de la imagen Docker|
@@ -122,6 +126,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## autocompletar
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`autocompletar.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`autocompletar.replicas`|`int`|1|Número de réplicas del servicio|
 |`autocompletar.image`|`string`|"gnoss/gnoss.autocomplete.enterprise"|Imagen Docker del servicio|
 |`autocompletar.tag`|`string`|""|Tag de la imagen Docker|
@@ -138,6 +143,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## despliegues
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`despliegues.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`despliegues.replicas`|`int`|1|Número de réplicas del servicio|
 |`despliegues.image`|`string`|"gnoss/gnoss.deploy.enterprise"|Imagen Docker del servicio|
 |`despliegues.tag`|`string`|""|Tag de la imagen Docker|
@@ -154,6 +160,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## api
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`api.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`api.replicas`|`int`|1|Número de réplicas del servicio|
 |`api.image`|`string`|"gnoss/gnoss.api.enterprise"|Imagen Docker del servicio|
 |`api.tag`|`string`|""|Tag de la imagen Docker|
@@ -170,6 +177,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## oauth
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`oauth.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`oauth.replicas`|`int`|1|Número de réplicas del servicio|
 |`oauth.image`|`string`|"gnoss/gnoss.oauth.enterprise"|Imagen Docker del servicio|
 |`oauth.tag`|`string`|""|Tag de la imagen Docker|
@@ -188,6 +196,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## identityserver
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`identityserver.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`identityserver.replicas`|`int`|1|Número de réplicas del servicio|
 |`identityserver.image`|`string`|"gnoss/gnoss.identityserver.enterprise"|Imagen Docker del servicio|
 |`identityserver.tag`|`string`|""|Tag de la imagen Docker|
@@ -209,6 +218,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## etiquetadoautomatico
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`etiquetadoautomatico.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`etiquetadoautomatico.replicas`|`int`|1|Número de réplicas del servicio|
 |`etiquetadoautomatico.image`|`string`|"gnoss/gnoss.etiquetadoautomatico.enterprise"|Imagen Docker del servicio|
 |`etiquetadoautomatico.tag`|`string`|""|Tag de la imagen Docker|
@@ -230,6 +240,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## documents
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`documents.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`documents.replicas`|`int`|1|Número de réplicas del servicio|
 |`documents.image`|`string`|"gnoss/gnoss.documents.enterprise"|Imagen Docker del servicio|
 |`documents.tag`|`string`|""|Tag de la imagen Docker|
@@ -247,6 +258,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## interno
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`interno.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`interno.replicas`|`int`|1|Número de réplicas del servicio|
 |`interno.image`|`string`|"gnoss/gnoss.intern.enterprise"|Imagen Docker del servicio|
 |`interno.tag`|`string`|""|Tag de la imagen Docker|
@@ -264,6 +276,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## ontologias
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`ontologias.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`ontologias.replicas`|`int`|1|Número de réplicas del servicio|
 |`ontologias.image`|`string`|"gnoss/gnoss.ontologies.enterprise"|Imagen Docker del servicio|
 |`ontologias.tag`|`string`|""|Tag de la imagen Docker|
@@ -287,6 +300,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## mailservice
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`mailservice.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`mailservice.replicas`|`int`|1|Número de réplicas del servicio|
 |`mailservice.image`|`string`|"gnoss/gnoss.mail.enterprise"|Imagen Docker del servicio|
 |`mailservice.tag`|`string`|""|Tag de la imagen Docker|
@@ -302,6 +316,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## cacherefresh
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`cacherefresh.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`cacherefresh.replicas`|`int`|1|Número de réplicas del servicio|
 |`cacherefresh.image`|`string`|"gnoss/gnoss.cacherefresh.enterprise"|Imagen Docker del servicio|
 |`cacherefresh.tag`|`string`|""|Tag de la imagen Docker|
@@ -317,6 +332,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## distributor
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`distributor.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`distributor.replicas`|`int`|1|Número de réplicas del servicio|
 |`distributor.image`|`string`|"gnoss/gnoss.distributor.enterprise"|Imagen Docker del servicio|
 |`distributor.tag`|`string`|""|Tag de la imagen Docker|
@@ -332,6 +348,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## searchgraphgeneration
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`searchgraphgeneration.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`searchgraphgeneration.replicas`|`int`|1|Número de réplicas del servicio|
 |`searchgraphgeneration.image`|`string`|"gnoss/gnoss.searchgraphgeneration.enterprise"|Imagen Docker del servicio|
 |`searchgraphgeneration.tag`|`string`|""|Tag de la imagen Docker|
@@ -347,6 +364,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## visitcluster
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`visitcluster.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`visitcluster.replicas`|`int`|1|Número de réplicas del servicio|
 |`visitcluster.image`|`string`|"gnoss/gnoss.visitcluster.enterprise"|Imagen Docker del servicio|
 |`visitcluster.tag`|`string`|""|Tag de la imagen Docker|
@@ -363,6 +381,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## visitregistry
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`visitregistry.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`visitregistry.replicas`|`int`|1|Número de réplicas del servicio|
 |`visitregistry.image`|`string`|"gnoss/gnoss.visitregistry.enterprise"|Imagen Docker del servicio|
 |`visitregistry.tag`|`string`|""|Tag de la imagen Docker|
@@ -379,6 +398,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## thumbnailgenerator
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`thumbnailgenerator.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`thumbnailgenerator.image`|`string`|"gnoss/gnoss.thumbnail.enterprise"|Imagen Docker del servicio|
 |`thumbnailgenerator.tag`|`string`|""|Tag de la imagen Docker|
 |`thumbnailgenerator.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -393,6 +413,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## communitywall
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`communitywall.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`communitywall.image`|`string`|"gnoss/gnoss.communitywall.enterprise"|Imagen Docker del servicio|
 |`communitywall.tag`|`string`|""|Tag de la imagen Docker|
 |`communitywall.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -407,6 +428,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## socialcacherefresh
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`socialcacherefresh.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`socialcacherefresh.image`|`string`|"gnoss/gnoss.socialcacherefresh.enterprise"|Imagen Docker del servicio|
 |`socialcacherefresh.tag`|`string`|""|Tag de la imagen Docker|
 |`socialcacherefresh.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -421,6 +443,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## socialsearchgraphgeneration
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`socialsearchgraphgeneration.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`socialsearchgraphgeneration.image`|`string`|"gnoss/gnoss.socialsearchgraphgeneration.enterprise"|Imagen Docker del servicio|
 |`socialsearchgraphgeneration.tag`|`string`|""|Tag de la imagen Docker|
 |`socialsearchgraphgeneration.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -435,6 +458,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## subscriptionsmail
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`subscriptionsmail.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`subscriptionsmail.image`|`string`|"gnoss/gnoss.subscriptionsmail.enterprise"|Imagen Docker del servicio|
 |`subscriptionsmail.tag`|`string`|""|Tag de la imagen Docker|
 |`subscriptionsmail.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -449,6 +473,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## replication
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`replication.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`replication.image`|`string`|"gnoss/gnoss.backgroundtask.replication.opencore"|Imagen Docker del servicio|
 |`replication.tag`|`string`|""|Tag de la imagen Docker|
 |`replication.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -469,6 +494,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## newsletters
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`newsletters.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`newsletters.image`|`string`|"gnoss/gnoss.newsletters.enterprise"|Imagen Docker del servicio|
 |`newsletters.tag`|`string`|""|Tag de la imagen Docker|
 |`newsletters.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -483,6 +509,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## userwall
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`userwall.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`userwall.image`|`string`|"gnoss/gnoss.userwall.enterprise"|Imagen Docker del servicio|
 |`userwall.tag`|`string`|""|Tag de la imagen Docker|
 |`userwall.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
@@ -497,6 +524,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 ## workflows
 | Clave | Tipo | Valor por defecto | Descripción|
 | -- | -- | -- | --|
+|`workflows.enabled`|`bool`|true|Indica si el servicio está habilitado. Si es `false`, no se crean sus recursos en Kubernetes (Deployment/StatefulSet, ConfigMap, Service, Ingress)|
 |`workflows.replicas`|`int`|0|Número de réplicas del servicio (0 = deshabilitado por defecto)|
 |`workflows.image`|`string`|"gnoss/gnoss.workflows.enterprise"|Imagen Docker del servicio|
 |`workflows.tag`|`string`|""|Tag de la imagen Docker|

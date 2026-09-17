@@ -20,34 +20,43 @@ spec:
   - host: {{ .Values.global.hosts.services}}
     http:
       paths:
+      {{- if .Values.facetas.enabled }}
       - path: /facetas(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: facetas
-            port: 
+            port:
               number: 8080
+      {{- end }}
+      {{- if .Values.results.enabled }}
       - path: /resultados(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: resultados
-            port: 
+            port:
               number: 8080
+      {{- end }}
+      {{- if .Values.login.enabled }}
       - path: /login(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: login
-            port: 
+            port:
               number: 8080
+      {{- end }}
+      {{- if .Values.autocompletar.enabled }}
       - path: /autocompletar(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: autocompletar
-            port: 
+            port:
               number: 8080
+      {{- end }}
+      {{- if .Values.etiquetadoautomatico.enabled }}
       - path: /autocompletaretiquetas(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
@@ -55,17 +64,22 @@ spec:
             name: etiquetadoautomatico
             port:
               number: 8080
+      {{- end }}
+      {{- if .Values.api.enabled }}
       - path: /api(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: api
-            port: 
+            port:
               number: 8080
+      {{- end }}
+      {{- if .Values.despliegues.enabled }}
       - path: /despliegues(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: despliegues
-            port: 
+            port:
               number: 8080
+      {{- end }}

@@ -1,3 +1,4 @@
+{{- if .Values.thumbnailgenerator.enabled }}
 #########################
 #  THUMBNAILGENERATOR   #
 #########################
@@ -134,3 +135,4 @@ spec:
         - name: logs-config
           configMap:
             name: thumbnailgenerator
+{{- end }}

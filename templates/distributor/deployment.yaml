@@ -1,3 +1,4 @@
+{{- if .Values.distributor.enabled }}
 #################
 #  DISTRIBUTOR  #
 #################
@@ -119,3 +120,4 @@ spec:
         - name: logs-config
           configMap:
             name: distributor
+{{- end }}

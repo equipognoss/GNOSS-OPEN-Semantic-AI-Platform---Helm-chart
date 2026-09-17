@@ -1,3 +1,4 @@
+{{- if .Values.socialsearchgraphgeneration.enabled }}
 ##################################
 # SOCIAL_SEARCH_GRAPH_GENERATION #
 ##################################
@@ -134,3 +135,4 @@ spec:
         - name: logs-config
           configMap:
             name: socialsearchgraphgeneration
+{{- end }}

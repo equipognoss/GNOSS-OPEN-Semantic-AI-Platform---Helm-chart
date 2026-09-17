@@ -1,3 +1,4 @@
+{{- if .Values.newsletters.enabled }}
 #################
 #  NEWSLETTERS  #
 #################
@@ -119,3 +120,4 @@ spec:
         - name: logs-config
           configMap:
             name: newsletters
+{{- end }}
