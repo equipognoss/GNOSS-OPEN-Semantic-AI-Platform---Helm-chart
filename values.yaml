@@ -118,7 +118,10 @@ web:
     overrides:
       "Microsoft": "Warning"
       "Microsoft.Hosting.Lifetime": "Information"
-      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"    
+      "Microsoft.AspNetCore.Hosting.Diagnostics": "Warning"
+  robotsTxt: |
+    User-agent: *
+    Disallow: /
 
 login:
   replicas: 1

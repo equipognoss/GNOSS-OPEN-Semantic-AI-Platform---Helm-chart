@@ -66,6 +66,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`web.logs.enabled`|`bool`|true|Indica si se habilita el volumen de logs|
 |`web.logs.size`|`string`|"1Gi"|Tamaño del volumen de logs|
 |`web.logs.path`|`string`|"/app/logs"|Ruta del volumen de logs dentro del contenedor|
+|`web.robotsTxt`|`string`|`"User-agent: *`<br>`Disallow: /"`|Contenido del archivo `robots.txt`|
 
 ## login
 | Clave | Tipo | Valor por defecto | Descripción|

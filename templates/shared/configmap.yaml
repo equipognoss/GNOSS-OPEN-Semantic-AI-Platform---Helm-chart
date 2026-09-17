@@ -63,5 +63,4 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   robots.txt: |
-    User-agent: *
-    Disallow: /
+{{ .Values.web.robotsTxt | indent 4 }}
