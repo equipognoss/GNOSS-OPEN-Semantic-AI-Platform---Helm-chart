@@ -56,6 +56,26 @@ spec:
             memory: {{ .Values.replication.requestMemory }}
             cpu: {{ .Values.replication.requestCpu }}
         {{- end }}
+        ports:
+        - name: "management-port"
+          containerPort: {{ .Values.general.managementPort }}
+          protocol: TCP
+        {{- if .Values.general.healthChecksEnabled }}
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: {{ .Values.general.managementPort }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: {{ .Values.general.managementPort }}
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          failureThreshold: 3
+        {{- end }}
         envFrom:
           - configMapRef:
               name: config-gnoss-core

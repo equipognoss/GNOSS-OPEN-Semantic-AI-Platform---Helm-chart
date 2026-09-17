@@ -47,6 +47,9 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`general.user`|`int`| ID del usuario con el que se ejecuta el contenedor, debe coincidir con el mismo que usa la imagen. No debería cambiarse a no ser que cambie en la imagen|
 |`general.group`|`int`| ID del grupo con el que se ejecuta el contenedor, debe coincidir con el mismo que usa la imagen. No debería cambiarse a no ser que cambie en la imagen|
 |`general.language`|`string`| Idiomas disponibles en la plataforma con el formato `clave_idioma1|nombre_idioma1,clave_idioma2|nombre_idioma2`los idiomas deben ser de entre los 10 soportados por la plataforma|
+|`general.apiPort`|`int`|8080|Puerto que recibe el tráfico API. Publicado en ingress / reverse proxy|
+|`general.managementPort`|`int`|8081|Solo red interna del clúster. Se utiliza para las comprobaciones liveness y readiness de las aplicaciones|
+|`general.healthChecksEnabled`|`bool`|true|Indica si se configuran los `livenessProbe`/`readinessProbe` en los Deployments/StatefulSets|
 
 ## web
 | Clave | Tipo | Valor por defecto | Descripción|

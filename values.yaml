@@ -89,6 +89,9 @@ general:
   language: "es|Español,en|English,ca|Català,eu|Euskara,gl|Galego"
   replicacionActivada: true
   replicacionActivadaHome: true
+  apiPort: 8080
+  managementPort: 8081
+  healthChecksEnabled: true
 
 ######################################
 #                                    #

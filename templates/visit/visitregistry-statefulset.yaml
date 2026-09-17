@@ -98,6 +98,25 @@ spec:
         - containerPort: {{ .Values.visitregistry.udpPort | int }}
           protocol: UDP
           name: udp-visits
+        - name: "management-port"
+          containerPort: {{ .Values.general.managementPort }}
+          protocol: TCP
+        {{- if .Values.general.healthChecksEnabled }}
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: {{ .Values.general.managementPort }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: {{ .Values.general.managementPort }}
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          failureThreshold: 3
+        {{- end }}
         volumeMounts:
         - name: logs-config
           mountPath: /app/logging-config

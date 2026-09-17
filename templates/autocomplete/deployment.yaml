@@ -77,8 +77,27 @@ spec:
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
         ports:
         - name: "port-autocomple"
-          containerPort: 8080
+          containerPort: {{ .Values.general.apiPort }}
           protocol: TCP
+        - name: "management-port"
+          containerPort: {{ .Values.general.managementPort }}
+          protocol: TCP
+        {{- if .Values.general.healthChecksEnabled }}
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: {{ .Values.general.managementPort }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: {{ .Values.general.managementPort }}
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          failureThreshold: 3
+        {{- end }}
         volumeMounts:
         - name: logs-config
           mountPath: /app/logging-config
