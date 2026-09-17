@@ -74,8 +74,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
-        - name: Servicios__urlBase
-          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.services }}
         - name: rutaOntologias
           value: "Ontologias/Archivos"
         ports:

@@ -90,8 +90,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.identity.name }}
               key: {{ .Values.secrets.identity.clientSecret.secretKey }}
-        - name: Servicios__urlBase
-          value: {{ printf "%s://%s" .Values.ingress.schema_servicios .Values.global.hosts.services }}
         ports:
         - name: "port-results"
           containerPort: 8080
