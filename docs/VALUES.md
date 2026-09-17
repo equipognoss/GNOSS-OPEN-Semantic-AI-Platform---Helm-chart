@@ -175,6 +175,7 @@ A continuación se listan todas los posibles valores que acepta el chart.
 |`oauth.tag`|`string`|""|Tag de la imagen Docker|
 |`oauth.debugNodePort`|`int`|30011|NodePort expuesto para depuración remota|
 |`oauth.pullPolicy`|`string`|IfNotPresent|Política de descarga de la imagen|
+|`oauth.rateLimitPermitLimit`|`string`|"2000"|Número máximo de peticiones permitidas por ventana de rate limiting en el servicio OAuth|
 |`oauth.limitsEnabled`|`bool`|true|Indica si se aplican límites de recursos|
 |`oauth.limitMemory`|`string`|800Mi|Límite de memoria del contenedor|
 |`oauth.limitCpu`|`string`|2|Límite de CPU del contenedor|

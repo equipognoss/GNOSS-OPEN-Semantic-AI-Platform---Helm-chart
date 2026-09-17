@@ -80,6 +80,8 @@ spec:
             secretKeyRef:
               name: {{ .Values.secrets.virtuoso.name }}
               key: {{ .Values.secrets.virtuoso.write1.secretKey }}
+        - name: OAuthSettings__RateLimitPermitLimit
+          value: {{ .Values.oauth.rateLimitPermitLimit | quote }}
         ports:
         - name: "port-oauth"
           containerPort: {{ .Values.general.apiPort }}

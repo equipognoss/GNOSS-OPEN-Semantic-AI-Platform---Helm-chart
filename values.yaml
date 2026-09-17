@@ -252,6 +252,7 @@ oauth:
   tag: ""
   debugNodePort: 30011
   pullPolicy: IfNotPresent
+  rateLimitPermitLimit: "2000"
   limitsEnabled: true
   limitMemory: 800Mi
   limitCpu: 2
